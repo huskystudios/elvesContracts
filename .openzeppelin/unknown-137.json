@@ -1,0 +1,336 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xbe19604c2177f833b8B0E29F1D209abB5513571d",
+    "txHash": "0x3d394756eb4c1bcf6e2ad7e0d52727ddfbfc83f9c1c79820c3c4425e59338f18",
+    "deployTransaction": {
+      "hash": "0x3d394756eb4c1bcf6e2ad7e0d52727ddfbfc83f9c1c79820c3c4425e59338f18",
+      "type": 2,
+      "accessList": [],
+      "blockHash": null,
+      "blockNumber": null,
+      "transactionIndex": null,
+      "confirmations": 0,
+      "from": "0xe7AF77629e7ECEd41C7B7490Ca9C4788F7c385E5",
+      "gasPrice": {
+        "type": "BigNumber",
+        "hex": "0x0a7a364028"
+      },
+      "maxPriorityFeePerGas": {
+        "type": "BigNumber",
+        "hex": "0x0a7a33c149"
+      },
+      "maxFeePerGas": {
+        "type": "BigNumber",
+        "hex": "0x0a7a364028"
+      },
+      "gasLimit": {
+        "type": "BigNumber",
+        "hex": "0x0762b4"
+      },
+      "to": null,
+      "value": {
+        "type": "BigNumber",
+        "hex": "0x00"
+      },
+      "nonce": 11,
+      "data": "0x608060405234801561001057600080fd5b50600080546001600160a01b031916339081178255604051909182917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a350610759806100616000396000f3fe60806040526004361061007b5760003560e01c80639623609d1161004e5780639623609d1461011157806399a88ec414610124578063f2fde38b14610144578063f3b7dead146101645761007b565b8063204e1c7a14610080578063715018a6146100bc5780637eff275e146100d35780638da5cb5b146100f3575b600080fd5b34801561008c57600080fd5b506100a061009b366004610515565b610184565b6040516001600160a01b03909116815260200160405180910390f35b3480156100c857600080fd5b506100d1610215565b005b3480156100df57600080fd5b506100d16100ee366004610554565b610292565b3480156100ff57600080fd5b506000546001600160a01b03166100a0565b6100d161011f36600461058c565b61031c565b34801561013057600080fd5b506100d161013f366004610554565b6103ad565b34801561015057600080fd5b506100d161015f366004610515565b610405565b34801561017057600080fd5b506100a061017f366004610515565b6104ef565b6000806000836001600160a01b03166040516101aa90635c60da1b60e01b815260040190565b600060405180830381855afa9150503d80600081146101e5576040519150601f19603f3d011682016040523d82523d6000602084013e6101ea565b606091505b5091509150816101f957600080fd5b8080602001905181019061020d9190610538565b949350505050565b6000546001600160a01b031633146102485760405162461bcd60e51b815260040161023f906106c0565b60405180910390fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031633146102bc5760405162461bcd60e51b815260040161023f906106c0565b6040516308f2839760e41b81526001600160a01b038281166004830152831690638f283970906024015b600060405180830381600087803b15801561030057600080fd5b505af1158015610314573d6000803e3d6000fd5b505050505050565b6000546001600160a01b031633146103465760405162461bcd60e51b815260040161023f906106c0565b60405163278f794360e11b81526001600160a01b03841690634f1ef286903490610376908690869060040161065d565b6000604051808303818588803b15801561038f57600080fd5b505af11580156103a3573d6000803e3d6000fd5b5050505050505050565b6000546001600160a01b031633146103d75760405162461bcd60e51b815260040161023f906106c0565b604051631b2ce7f360e11b81526001600160a01b038281166004830152831690633659cfe6906024016102e6565b6000546001600160a01b0316331461042f5760405162461bcd60e51b815260040161023f906106c0565b6001600160a01b0381166104945760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b606482015260840161023f565b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b6000806000836001600160a01b03166040516101aa906303e1469160e61b815260040190565b600060208284031215610526578081fd5b81356105318161070b565b9392505050565b600060208284031215610549578081fd5b81516105318161070b565b60008060408385031215610566578081fd5b82356105718161070b565b915060208301356105818161070b565b809150509250929050565b6000806000606084860312156105a0578081fd5b83356105ab8161070b565b925060208401356105bb8161070b565b9150604084013567ffffffffffffffff808211156105d7578283fd5b818601915086601f8301126105ea578283fd5b8135818111156105fc576105fc6106f5565b604051601f8201601f19908116603f01168101908382118183101715610624576106246106f5565b8160405282815289602084870101111561063c578586fd5b82602086016020830137856020848301015280955050505050509250925092565b600060018060a01b038416825260206040818401528351806040850152825b818110156106985785810183015185820160600152820161067c565b818111156106a95783606083870101525b50601f01601f191692909201606001949350505050565b6020808252818101527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604082015260600190565b634e487b7160e01b600052604160045260246000fd5b6001600160a01b038116811461072057600080fd5b5056fea2646970667358221220d849f96f3086b9f82cdcf665adb8c697ace05638da1c7c16ab2d26293717af6764736f6c63430008020033",
+      "r": "0x6c57e40f541c16e982c0b28b7dfe93f4f7242e08b9d249da7fa29d9914e55ce6",
+      "s": "0x1430967d657d21d964e060897ad085afa3756581a7473a7d0ce7827834499497",
+      "v": 0,
+      "creates": "0xbe19604c2177f833b8B0E29F1D209abB5513571d",
+      "chainId": 137
+    }
+  },
+  "proxies": [
+    {
+      "address": "0x3cF1630393BFd1D9fF52bD822fE88714FC81467E",
+      "txHash": "0x889cf9a84bda03dccfdf62e772226eb8e77e78fd7ede91a8bdc699bdcd704699",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4DeAb743F79b582c9b1d46b4aF61A69477185dd5",
+      "txHash": "0xdaf89fb069c67509e25e7bb69752121890c6fd9cefb2a3b00ba193892ac06ab0",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "0198b6f8ab0f2bccb573423c52c3415af1edab685c23717992cf6e92755170ec": {
+      "address": "0xBE55aBFcd0Bc8863A7472a735E7001509ff0b7B8",
+      "txHash": "0xaf38a2ca83bb0eafc21d4d6cff2aede0ebbde7ea043c1264d830e5af85013ef9",
+      "layout": {
+        "storage": [
+          {
+            "contract": "ElfMetadataHandler",
+            "label": "impl_",
+            "type": "t_address",
+            "src": "contracts\\ElfInventoryManager.sol:10"
+          },
+          {
+            "contract": "ElfMetadataHandler",
+            "label": "manager",
+            "type": "t_address",
+            "src": "contracts\\ElfInventoryManager.sol:11"
+          },
+          {
+            "contract": "ElfMetadataHandler",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "contracts\\ElfInventoryManager.sol:12"
+          },
+          {
+            "contract": "ElfMetadataHandler",
+            "label": "race",
+            "type": "t_mapping(t_uint8,t_address)",
+            "src": "contracts\\ElfInventoryManager.sol:21"
+          },
+          {
+            "contract": "ElfMetadataHandler",
+            "label": "hair",
+            "type": "t_mapping(t_uint8,t_address)",
+            "src": "contracts\\ElfInventoryManager.sol:22"
+          },
+          {
+            "contract": "ElfMetadataHandler",
+            "label": "primaryWeapon",
+            "type": "t_mapping(t_uint8,t_address)",
+            "src": "contracts\\ElfInventoryManager.sol:23"
+          },
+          {
+            "contract": "ElfMetadataHandler",
+            "label": "accessories",
+            "type": "t_mapping(t_uint8,t_address)",
+            "src": "contracts\\ElfInventoryManager.sol:24"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_uint8,t_address)": {
+            "label": "mapping(uint8 => address)"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "ad6277d6f49ee19f78e474e4567ac82c3af2ccb3dd240d17255e50e570506b7a": {
+      "address": "0x40b7D9ec1EdcF7f20bC2CC7D6ba5Ba59c3A92295",
+      "txHash": "0x460818626e9b5c50dfd23aee217f747f59ffb696248e597c941f7d8a3390b499",
+      "layout": {
+        "storage": [
+          {
+            "contract": "PolyERC721",
+            "label": "implementation_",
+            "type": "t_address",
+            "src": "contracts\\Polygon\\ERC721.sol:21"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "admin",
+            "type": "t_address",
+            "src": "contracts\\Polygon\\ERC721.sol:22"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "totalSupply",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\ERC721.sol:28"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "oldSupply",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\ERC721.sol:29"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "minted",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\ERC721.sol:30"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "balanceOf",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "contracts\\Polygon\\ERC721.sol:32"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "ownerOf",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "contracts\\Polygon\\ERC721.sol:34"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "getApproved",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "contracts\\Polygon\\ERC721.sol:36"
+          },
+          {
+            "contract": "PolyERC721",
+            "label": "isApprovedForAll",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "src": "contracts\\Polygon\\ERC721.sol:38"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "elfmetaDataHandler",
+            "type": "t_contract(IElfMetaDataHandler)7177",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:24"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "isGameActive",
+            "type": "t_bool",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:30"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "isTerminalOpen",
+            "type": "t_bool",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:31"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:32"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "operator",
+            "type": "t_address",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:34"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "INIT_SUPPLY",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:37"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "price",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:38"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "MAX_LEVEL",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:39"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "TIME_CONSTANT",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:40"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "REGEN_TIME",
+            "type": "t_uint256",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:41"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "ketchup",
+            "type": "t_bytes32",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:43"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "sentinels",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:45"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "bankBalances",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:46"
+          },
+          {
+            "contract": "PolyEthernalElves",
+            "label": "camps",
+            "type": "t_mapping(t_uint256,t_struct(Camps)8344_storage)",
+            "src": "contracts\\Polygon\\EthernalElvesPoly.sol:47"
+          }
+        ],
+        "types": {
+          "t_contract(IElfMetaDataHandler)7177": {
+            "label": "contract IElfMetaDataHandler"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_uint256,t_struct(Camps)8344_storage)": {
+            "label": "mapping(uint256 => struct PolyEthernalElves.Camps)"
+          },
+          "t_struct(Camps)8344_storage": {
+            "label": "struct PolyEthernalElves.Camps",
+            "members": [
+              {
+                "label": "baseRewards",
+                "type": "t_uint32"
+              },
+              {
+                "label": "creatureCount",
+                "type": "t_uint32"
+              },
+              {
+                "label": "creatureHealth",
+                "type": "t_uint32"
+              },
+              {
+                "label": "expPoints",
+                "type": "t_uint32"
+              },
+              {
+                "label": "minLevel",
+                "type": "t_uint32"
+              },
+              {
+                "label": "campMaxLevel",
+                "type": "t_uint32"
+              }
+            ]
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          }
+        }
+      }
+    }
+  }
+}

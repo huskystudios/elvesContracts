@@ -1,0 +1,33 @@
+{
+  "name": "ethernalelves",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.4",
+    "@nomiclabs/hardhat-waffle": "^2.0.2",
+    "@openzeppelin/hardhat-upgrades": "^1.14.0",
+    "chai": "^4.3.6",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.5.2",
+    "hardhat": "^2.8.3",
+    "hardhat-gas-reporter": "^1.0.6",
+    "prettier": "^2.5.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.19"
+  },
+  "dependencies": {
+    "@alch/alchemy-web3": "^1.1.9",
+    "@nomiclabs/hardhat-etherscan": "^2.1.8",
+    "@openzeppelin/contracts": "^4.4.0",
+    "@openzeppelin/contracts-upgradeable": "^4.4.1",
+    "dotenv": "^10.0.0",
+    "galia": "^0.1.1",
+    "hardhat-contract-sizer": "^2.3.1"
+  }
+}
