@@ -84,16 +84,10 @@ contract PolyEthernalElvesV3 is PolyERC721 {
 
     function setValidator(address _validator)  public {
        onlyOwner();
-      
        polyValidator = _validator;
     }      
     
- /*   function newCamps()  public {
-       onlyOwner();
-       camps[4] = Camps({baseRewards: 24, creatureCount: 4000, creatureHealth: 192,  expPoints:9,   minLevel:7, campMaxLevel:30});
-       camps[5] = Camps({baseRewards: 36, creatureCount: 4000, creatureHealth: 264,  expPoints:9,   minLevel:14, campMaxLevel:50});
-    }   
-   */ 
+
 
 //EVENTS
 
