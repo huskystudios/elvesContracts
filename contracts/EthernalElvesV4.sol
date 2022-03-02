@@ -9,8 +9,8 @@ import "./Interfaces.sol";
 
 // We are the Ethernal. The Ethernal Elves         
 // Written by 0xHusky & Beff Jezos. Everything is on-chain for all time to come.
-// Version 2.0.0
-// Release notes: Export Sentinel / Polygon
+// Version 2.0.1
+// Release notes: Reroll price for weapons adjuseted
 
 contract EthernalElvesV4 is ERC721 {
 
@@ -451,7 +451,7 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
 
                 }else if(action == 5){//forge loop for weapons
                    
-                    require(msg.value >= .01 ether, "Wrong value sent");  
+                    require(msg.value >= .04 ether, "Wrong value sent");  
                     require(elf.action != 3, "Cant roll in passive"); //Cant roll in passve mode  
                     require(elf.weaponTier <= 3, "Cannot roll a new weapon"); //T4 and T5 cannot roll new weapons
                    //                    
