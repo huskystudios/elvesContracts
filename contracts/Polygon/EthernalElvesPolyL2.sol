@@ -483,7 +483,7 @@ function _instantKill(uint256 timestamp, uint256 weaponTier, address elfOwner, u
   uint256 killChance = weaponTier == 3 ? 10 : weaponTier == 4 ? 15 : weaponTier == 5 ? 20 : 0;
 
     if(chance <= killChance){
-        timestamp_ = block.timestamp + (15 minutes);
+        timestamp_ = block.timestamp + (4 hours);
         emit BloodThirst(elfOwner, id);
     }else{
         timestamp_ = timestamp;
