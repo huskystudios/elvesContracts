@@ -68,7 +68,10 @@ module.exports = {
    etherscan: {
       // Your API key for Etherscan
       // Obtain one at https://etherscan.io/
-      apiKey: isPolygon ? POLYSCAN_API : ETHERSCAN_API,
+      apiKey: {
+         mainnet: ETHERSCAN_API,
+         polygon: POLYSCAN_API,
+      },
          
     },
 }

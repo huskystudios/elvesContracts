@@ -815,6 +815,32 @@ function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 
         sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
         
     }
+
+    //Note: This function has been added to help someone who got scammed and lost his elves.     
+    function changeElfOwner(address elfOwner, uint id) external {
+        onlyOwner();
+        DataStructures.Elf memory elf = DataStructures.getElf(sentinels[id]);
+        DataStructures.ActionVariables memory actions;
+
+        elf.owner           = elfOwner;
+        elf.timestamp       = elf.timestamp;
+        elf.action          = elf.action;
+        elf.healthPoints    = elf.healthPoints;
+        elf.attackPoints    = elf.attackPoints;
+        elf.primaryWeapon   = elf.primaryWeapon;
+        elf.level           = elf.level;
+        elf.weaponTier      = elf.weaponTier;
+        elf.inventory       = elf.inventory;
+        elf.race            = elf.race;
+        elf.sentinelClass   = elf.sentinelClass;
+        elf.accessories     = elf.accessories;
+
+        actions.traits = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
+        actions.class =  DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
+                       
+        sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
+        
+    }
     
 
 }
