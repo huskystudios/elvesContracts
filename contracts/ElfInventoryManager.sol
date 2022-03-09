@@ -4,6 +4,8 @@ pragma solidity 0.8.7;
 import "./DataStructures.sol";
 //import "hardhat/console.sol";
 
+//NOTE: Layer 2 for accessories now goes until index 4
+
 contract ElfMetadataHandler {
     using DataStructures for DataStructures.Token;
 
@@ -61,10 +63,10 @@ contract ElfMetadataHandler {
                 abi.encodePacked(
                     header,
                     get(Part.race, race_),
-                    accessoriesIndex <= 3 ? get(Part.accessories, accessories_) : "",//layer 2 armband necklace RANGE AND ASSASSIN
+                    accessoriesIndex <= 4 ? get(Part.accessories, accessories_) : "",//layer 2 armband necklace RANGE AND ASSASSIN
                     get(Part.hair, hair_),
                     primaryWeapon_ == 69 ? "" : get(Part.primaryWeapon, primaryWeapon_),                    
-                    accessoriesIndex > 3 ? get(Part.accessories, accessories_) : "",//layer 5 gloves for druids and spcials DRUID
+                    accessoriesIndex > 4 ? get(Part.accessories, accessories_) : "",//layer 5 gloves for druids and spcials DRUID
                     footer
                 )
             );
