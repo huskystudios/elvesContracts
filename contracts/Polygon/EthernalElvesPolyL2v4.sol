@@ -80,7 +80,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                 uint256 instantKillModifier;     
                 uint256 rewardModifier;     
                 uint256 attackPointModifier;     
-                uint256 healthPointModifier;;     
+                uint256 healthPointModifier;     
                 uint256 reward;
                 uint256 timeDiff;
                 uint256 traits; 
@@ -296,11 +296,11 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
           }
     }
   
- function rampage(uint256[] calldata ids, uint256 campaign_, address owner) external {
+ function rampage(uint256[] calldata ids, uint256 campaign_, bool tryWeapon_, bool tryAccessories_, bool useitem_, address owner) external {
           onlyOperator();       
-
+          //using items bool for try accessories
           for (uint256 index = 0; index < ids.length; index++) {  
-            _actions(ids[index], 11, owner, campaign_, 0, false, false,false, 0);
+            _actions(ids[index], 11, owner, campaign_, 0, tryWeapon_, tryAccessories_, useitem_, 0);
           }
     }     
 
@@ -325,7 +325,7 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
             require(elf.owner == elfOwner, "NotYourElf");
             
             //Set special abilities when we retrieve the elf so they can be used in the rest of the game loop.            
-                    (elf.attackPoints, actions) = _getAbilities(elf.attackPoints, elf.accessories, actions);
+                    (elf.attackPoints, actions) = _getAbilities(elf.attackPoints, elf.accessories, elf.sentinelClass, actions);
 
             uint256 rand = _rand();
                 
@@ -381,7 +381,7 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
                     require(elf.action != 3); //Cant roll in passve mode  
 
                     _setAccountBalance(elfOwner, 200 ether, true);
-                    (elf.primaryWeapon, elf.weaponTier) = _rollWeapon(elf.level, id_, rand);
+                    (elf.primaryWeapon, elf.weaponTier) = _rollWeapon(elf.level, id_, rand, 3);
    
                 
                 }else if(action == 6){//item or merchant loop
@@ -431,7 +431,7 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
 
                 }
                 //Action 8 is move to polygon
-                }else if(action == 9){//Re-roll cooldown
+                }else if(action == 9){//Re-roll cooldown aka Synergize
 
                     require(bankBalances[elfOwner] >= 5 ether, "Not Enough Ren");
                     require(elf.sentinelClass == 0, "not a healer"); 
@@ -445,7 +445,7 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
                     require(elf.timestamp < block.timestamp, "elf busy");
                     require(elf.action != 3, "exit passive mode first");  
 
-                       (elf.level, actions.reward, elf.timestamp, elf.inventory) = _bloodthirst(campaign_, sector_, elf.weaponTier, elf.level, elf.attackPoints, elf.healthPoints, elf.inventory, useItem);
+                       (actions.reward, elf.timestamp, elf.inventory) = _bloodthirst(campaign_, sector_, elf.weaponTier, elf.level, elf.attackPoints, elf.healthPoints, elf.inventory, useItem);
 
                        if(rollItems){
                        
@@ -467,7 +467,7 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
                 }else if(action == 11){//Rampage
                         require(elf.action != 3, "cant rampage while passive"); //Archer?
                         //in rampage you can get accessories or weapons.
-                        (elf.weaponTier, elf.primaryWeapon, elf.accessories, elf.level) = _rampage(elf.sentinalClass, elf.level, elf.weaponTier, elf.primaryWeapon, elf.accessories, campaign_, id_);
+                       (elf, actions) = _rampage(elf, actions, campaign_, id_, elfOwner, rollWeapons, rollItems, useItem);
                 
                 
                 }        
@@ -496,7 +496,7 @@ function _campaignsEngine(uint256 _campId, uint256 _sector, uint256 _level, uint
   
   camps[_campId].creatureCount = camp.creatureCount - 1;  
 
-  level = (uint256(camp.expPoints)/3); //convetrt xp to levels
+  level = (uint256(camp.expPoints)/3); //convetrt xp to levels. Level here is the rewards level
 
   rewards = camp.baseRewards + (2 * (_sector - 1));
   rewards = rewards * (1 ether);      
@@ -504,14 +504,9 @@ function _campaignsEngine(uint256 _campId, uint256 _sector, uint256 _level, uint
   inventory = _inventory;
  
   if(_useItem){
-         _attackPoints = _inventory == 1 ? _attackPoints * 2   : _attackPoints;
-         _healthPoints = _inventory == 2 ? _healthPoints * 2   : _healthPoints; 
-          rewards      = _inventory == 3 ?  rewards * 2        : rewards;
-          level        = _inventory == 4 ?  level * 2          : level; //if inventory is 4, level reward is doubled
-         _healthPoints = _inventory == 5 ? _healthPoints + 200 : _healthPoints; 
-         _attackPoints = _inventory == 6 ? _attackPoints * 3   : _attackPoints;
-         
-         inventory = 0;
+
+       (inventory, level, _attackPoints, _healthPoints, rewards) = _useInventory(_inventory, level, _attackPoints, _healthPoints, rewards);
+
   }
 
   level = _level + level;  //add level to current level
@@ -543,30 +538,23 @@ function _instantKill(uint256 timestamp, uint256 weaponTier, address elfOwner, u
 
  }
 
-   
+
 function _bloodthirst(uint256 _campId, uint256 _sector, uint256 weaponTier, uint256 _level, uint256 _attackPoints, uint256 _healthPoints, uint256 _inventory, bool _useItem) internal view
  
- returns(uint256 level, uint256 rewards, uint256 timestamp, uint256 inventory){
+ returns(uint256 rewards, uint256 timestamp, uint256 inventory){
   
+  uint256 creatureHealth =  400; 
+
   rewards = weaponTier == 3 ? 80 ether : weaponTier == 4 ? 95 ether : weaponTier == 5 ? 110 ether : 0;  
 
   inventory = _inventory;
  
   if(_useItem){
-         _attackPoints = _inventory == 1 ? _attackPoints * 2   : _attackPoints;
-         _healthPoints = _inventory == 2 ? _healthPoints * 2   : _healthPoints; 
-          rewards      = _inventory == 3 ?  rewards * 2        : rewards;
-          level        = _inventory == 4 ?  level * 2          : level; //if inventory is 4, level reward is doubled
-         _healthPoints = _inventory == 5 ? _healthPoints + 200 : _healthPoints; 
-         _attackPoints = _inventory == 6 ? _attackPoints * 3   : _attackPoints;
-         
-         inventory = 0;
-  }
 
-  level = _level; //+ level;  No level bonus for bloodthirst
-  level = level < MAX_LEVEL ? level : MAX_LEVEL; //if level is greater than max level, set to max level
-                             
-  uint256 creatureHealth =  400; 
+     (inventory, , _attackPoints, _healthPoints, rewards) = _useInventory(_inventory, 1, _attackPoints, _healthPoints, rewards);
+
+  }                            
+  
   uint256 attackTime = creatureHealth/_attackPoints;
   
   attackTime = attackTime > 0 ? attackTime * TIME_CONSTANT : 0;
@@ -575,29 +563,111 @@ function _bloodthirst(uint256 _campId, uint256 _sector, uint256 weaponTier, uint
 
 }
 
-function _rampage(uint256 _campId, uint256 _id) internal view
- 
- returns(uint256 level, uint256 rewards, uint256 timestamp, uint256 inventory){
+function _rampage(
 
-  Rampages memory rampage = rampages[_campId];  
+    DataStructures.Elf memory _elf, 
+    GameVariables memory _actions, 
+    uint256 _campId, 
+    uint256 _id, 
+    address elfOwner, 
+    bool tryWeapon, 
+    bool tryAccessories,
+    bool useItem
+    ) internal  
+    returns(
+            DataStructures.Elf memory elf, 
+            GameVariables memory actions
+            ){
 
-  require(rampage.minLevel <= _level, "level too low");
-  require(rampage.maxLevel >= _level, "level too high"); 
-  require(carampagemp.count > 0, "no rampage left");
-  require(bankBalances[elfOwner] >= rampage.renCost ether, "Not Enough Ren");
-  require(elf.action != 3, "cant rampage while passive"); //Cant heal in passve mode
+        Rampages memory rampage = rampages[_campId];  
+        uint256 rampageCost = uint256(rampage.renCost * 1 ether); //needed to
+        //assign values to the return struct.
+        elf = _elf;
+        actions = _actions;
 
-  _setAccountBalance(elfOwner, rampage.renCost ether, true);
+        require(rampage.minLevel <= elf.level, "level too low");
+        require(rampage.maxLevel >= elf.level, "level too high"); 
+        require(rampage.count > 0, "no rampage left, much sad");
+        require(bankBalances[elfOwner] >= rampageCost, "Not Enough Ren to rampage");
+        
+        rampage.count = rampage.count - 1;
+        _setAccountBalance(elfOwner, rampageCost, true);
 
+        uint256 cooldown = 36 hours;
+        uint256 rand = _rand();
+        uint16  chance = uint16(_randomize(rand, "Rampage", _id)) % 100;
 
-(elf.weaponTier, elf.primaryWeapon, elf.accessories, elf.level) = _rampage(elf.sentinalClass, elf.level, elf.weaponTier, elf.primaryWeapon, elf.accessories, campaign_, id_);
+        if(_campId == 6){
+            //Untamed Ether for DRUID Morphs
+           require(elf.sentinelClass == 0, "Only Druids can go here");
+           if(chance <= 50){
+               elf.accessories = 1;
+           }else{
+               elf.accessories = 2;
+           }
+        }
+        
+        if(elf.accessories <= 3 && tryAccessories && elf.sentinelClass != 0){
+            //enter accessories upgrade loop. Not allowed for >3 (one for ones) or druids
          
-                   
-                    
-                   
-      }
+                //if try accessories is true, try to get accessories
+                if(chance > 0 && chance <= rampage.probDown){
+                      //downgrade
+                       //dont downgrade if already 0
+                      elf.accessories = elf.accessories == 0 ? 0 : elf.accessories - 1;
 
-function _getAbilities(uint256 _attackPoints, uint256 _accesssories, GameVariables memory _actions) 
+                }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
+                        //same
+                        elf.accessories = elf.accessories;
+
+                }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
+                        //upgrade
+                        elf.accessories = elf.accessories + 1;
+
+                }
+
+            //prevent accessories from being upgraded if the elf has >3 accessories        
+            elf.accessories = elf.accessories > 3 ? 3 : elf.accessories;
+        }   
+
+        if(tryWeapon){
+
+                 if(chance > 0 && chance <= rampage.probDown){
+                       //downgrade
+                       elf.weaponTier = elf.weaponTier - 1 < 1 ? 1 : elf.weaponTier - 1;       
+
+                  }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
+                       //same
+                       elf.weaponTier = elf.weaponTier;
+
+                  }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
+                       //upgrade
+                       elf.weaponTier = elf.weaponTier + 1;
+                  }
+
+            elf.weaponTier = elf.weaponTier > 4 ? 4 : elf.weaponTier;
+            elf.primaryWeapon = ((elf.weaponTier - 1) * 3) + ((rand+1) % 3);        
+
+        }      
+        
+      elf.timestamp = block.timestamp + cooldown;
+      elf.level = elf.level + rampage.levelsGained;
+                   
+}
+
+function _useInventory(uint256 _inventory, uint256 _level, uint256 _attackPoints, uint256 _healthPoints, uint256 _rewards) internal view   
+    returns(uint256 inventory_, uint256 level_, uint256 attackPoints_, uint256 healthPoints_, uint256 rewards_){
+
+         attackPoints_ = _inventory == 1 ? _attackPoints * 2   : _inventory == 6 ? _attackPoints * 3   : _attackPoints;
+         healthPoints_ = _inventory == 2 ? _healthPoints * 2   : _inventory == 5 ? _healthPoints + 200 : _healthPoints; 
+         rewards_      = _inventory == 3 ? _rewards * 2        : _rewards;
+         level_        = _inventory == 4 ? _level * 2          : _level; 
+         
+         inventory_ = 0;
+}
+
+
+function _getAbilities(uint256 _attackPoints, uint256 _accesssories, uint256 sentinelClass, GameVariables memory _actions) 
         private returns (uint256 attackPoints_, GameVariables memory actions_) {
 
  attackPoints_ = _attackPoints;
@@ -609,11 +679,18 @@ function _getAbilities(uint256 _attackPoints, uint256 _accesssories, GameVariabl
  // SINS 80% Instant Kill
  // +20 AP for RANGERS 4x AP
 
+ _accesssories = ((7 * sentinelClass) + _accesssories) + 1;
+
 
         //if Druid 
-        if(_accesssories == 3){
-            actions_.healTime = 9 hours;
+        if(_accesssories == 1){
+            //Bear
+            _attackPoints = _attackPoints + 30;
 
+        }else if (_accesssories == 2){
+            //Liger
+            actions_.healTime = 4 hours;        
+        
         }else if(_accesssories == 10){
         //if Assassin 3
             actions_.instantKillModifier = 15;
@@ -641,13 +718,6 @@ function _getAbilities(uint256 _attackPoints, uint256 _accesssories, GameVariabl
 }
 
 
-
-
-
-
-
-
-
 function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private returns (uint256 level) {
             
             uint256 rewards;
@@ -673,7 +743,7 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
     }
 
 
-    function _rollWeapon(uint256 level, uint256 id, uint256 rand) internal pure returns (uint256 newWeapon, uint256 newWeaponTier) {
+    function _rollWeapon(uint256 level, uint256 id, uint256 rand, uint256 maxTierWeapon) internal pure returns (uint256 newWeapon, uint256 newWeaponTier) {
     
         uint256 levelTier = level == 100 ? 5 : uint256((level/20) + 1);
                 
@@ -688,14 +758,12 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
                              newWeaponTier = levelTier + 1 > 4 ? 4 : levelTier + 1;
         
                         }else{
-
-                                newWeaponTier = levelTier - 1 < 1 ? 1 : levelTier - 1;          
+                             newWeaponTier = levelTier - 1 < 1 ? 1 : levelTier - 1;          
                         }
                          
-                newWeaponTier = newWeaponTier > 3 ? 3 : newWeaponTier;
+                newWeaponTier = newWeaponTier > maxTierWeapon ? maxTierWeapon : newWeaponTier;
 
-                newWeapon = ((newWeaponTier - 1) * 3) + (rand % 3);  
-            
+                newWeapon = ((newWeaponTier - 1) * 3) + (rand % 3);              
         
     }
 
@@ -726,6 +794,9 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
         return timestamp_;    
                 
     }
+
+        
+
     
 
     function _setAccountBalance(address _owner, uint256 _amount, bool _subtract) private {
@@ -936,6 +1007,21 @@ function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 
         sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
         
     }
+
+    //////////////Remove beofre deploy live
+
+    
+    function initMint(uint256 start, uint256 end) external {
+        
+        onlyOwner();
+
+        for (uint256 i = start; i < end; i++) {
+            _mint( address(this), i);
+        }
+    
+    }
+    
+
     
 
 }
