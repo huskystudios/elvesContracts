@@ -59,7 +59,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     
     //NewDataSlots from this deployment///
     mapping(uint256 => Rampages) public rampages; //memory slot for campaigns
-    
+    bool private isRampageInit;
     struct Rampages {
 
                 uint16 probDown; 
@@ -104,6 +104,25 @@ contract PolyEthernalElvesV4 is PolyERC721 {
        TIME_CONSTANT = 1 hours; 
        REGEN_TIME = 300 hours; 
 
+       rampages[1] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[2] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:10, maxLevel:100, renCost:1, count:100});
+       rampages[3] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:15, maxLevel:20, renCost:1, count:100});
+       rampages[4] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[5] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[6] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:99, maxLevel:100, renCost:1, count:100});    
+
+    }
+
+    function initializeRampage() public {
+    
+       require(!isRampageInit, "Already initialized");
+       rampages[1] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[2] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[3] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[4] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[5] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
+       rampages[6] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});       
+       ////REMOVE THIS AFTER TESTING
     }
 
     function setAddresses(address _inventory, address _operator)  public {
@@ -612,9 +631,10 @@ function _rampage(
             //only spiritBand can be used in rampage
 
             levelsGained = levelsGained * 2;
+            elf.inventory = 0;
 
         }     
-        
+
         if(elf.accessories <= 3 && tryAccessories && elf.sentinelClass != 0){
             //enter accessories upgrade loop. Not allowed for >3 (one for ones) or druids
          
