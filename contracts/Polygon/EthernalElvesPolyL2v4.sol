@@ -614,8 +614,8 @@ function _rampage(
 
         uint256 cooldown = 36 hours;
         uint256 levelsGained = rampage.levelsGained;
-        uint256 rand = _rand();
-        uint16  chance = uint16(_randomize(rand, "Rampage", _id)) % 100;
+
+        uint256  chance = uint256(_randomize(_rand(), "Rampage", _id)) % 100;
 
         if(_campId == 6){
             //Untamed Ether for DRUID Morphs
@@ -635,51 +635,58 @@ function _rampage(
 
         }     
 
-        if(elf.accessories <= 3 && tryAccessories && elf.sentinelClass != 0){
-            //enter accessories upgrade loop. Not allowed for >3 (one for ones) or druids
-         
-                //if try accessories is true, try to get accessories
-                if(chance > 0 && chance <= rampage.probDown){
-                      //downgrade
-                       //dont downgrade if already 0
-                      elf.accessories = elf.accessories == 0 ? 0 : elf.accessories - 1;
+            if(tryAccessories){
 
-                }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
-                        //same
-                        elf.accessories = elf.accessories;
+                    if(elf.accessories <= 3 && elf.sentinelClass != 0){
+                        //enter accessories upgrade loop. Not allowed for >3 (one for ones) or druids
+                    
+                            //if try accessories is true, try to get accessories
+                            if(chance > 0 && chance <= rampage.probDown){
+                                //downgrade
+                                //dont downgrade if already 0
+                                elf.accessories = elf.accessories == 0 ? 0 : elf.accessories - 1;
 
-                }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
-                        //upgrade
-                        elf.accessories = elf.accessories + 1;
+                            }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
+                                    //same
+                                    elf.accessories = elf.accessories;
 
-                }
+                            }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
+                                    //upgrade
+                                    elf.accessories = elf.accessories + 1;
 
-            //prevent accessories from being upgraded if the elf has >3 accessories        
-            elf.accessories = elf.accessories > 3 ? 3 : elf.accessories;
-        }   
+                            }
 
-        if(tryWeapon){
+                        //prevent accessories from being upgraded if the elf has >3 accessories        
+                        elf.accessories = elf.accessories > 3 ? 3 : elf.accessories;
+                    }   
 
-                 if(chance > 0 && chance <= rampage.probDown){
-                       //downgrade
-                       elf.weaponTier = elf.weaponTier - 1 < 1 ? 1 : elf.weaponTier - 1;       
+            }else{
+                  
+                    if(tryWeapon){
 
-                  }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
-                       //same
-                       elf.weaponTier = elf.weaponTier;
+                                    if(chance > 0 && chance <= rampage.probDown){
+                                        //downgrade
+                                        elf.weaponTier = elf.weaponTier - 1 < 1 ? 1 : elf.weaponTier - 1;       
 
-                  }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
-                       //upgrade
-                       elf.weaponTier = elf.weaponTier + 1;
-                  }
+                                    }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
+                                        //same
+                                        elf.weaponTier = elf.weaponTier;
 
-            elf.weaponTier = elf.weaponTier > 4 ? 4 : elf.weaponTier;
-            elf.primaryWeapon = ((elf.weaponTier - 1) * 3) + ((rand+1) % 3);        
+                                    }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
+                                        //upgrade
+                                        elf.weaponTier = elf.weaponTier + 1;
+                                    }
 
-        }      
+                        elf.weaponTier = elf.weaponTier > 4 ? 4 : elf.weaponTier;
+                        elf.primaryWeapon = ((elf.weaponTier - 1) * 3) + ((chance +1) % 3);        
+
+                        }
+
+            }
         
       elf.timestamp = block.timestamp + cooldown;
       elf.level = elf.level + levelsGained;
+
                    
 }
 
