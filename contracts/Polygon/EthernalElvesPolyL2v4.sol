@@ -572,7 +572,7 @@ function _rampage(
     address elfOwner, 
     bool tryWeapon, 
     bool tryAccessories,
-    bool useItem
+    bool _useItem
     ) internal  
     returns(
             DataStructures.Elf memory elf, 
@@ -594,6 +594,7 @@ function _rampage(
         _setAccountBalance(elfOwner, rampageCost, true);
 
         uint256 cooldown = 36 hours;
+        uint256 levelsGained = rampage.levelsGained;
         uint256 rand = _rand();
         uint16  chance = uint16(_randomize(rand, "Rampage", _id)) % 100;
 
@@ -606,6 +607,13 @@ function _rampage(
                elf.accessories = 2;
            }
         }
+
+        if(_useItem && elf.inventory == 4){
+            //only spiritBand can be used in rampage
+
+            levelsGained = levelsGained * 2;
+
+        }     
         
         if(elf.accessories <= 3 && tryAccessories && elf.sentinelClass != 0){
             //enter accessories upgrade loop. Not allowed for >3 (one for ones) or druids
@@ -651,7 +659,7 @@ function _rampage(
         }      
         
       elf.timestamp = block.timestamp + cooldown;
-      elf.level = elf.level + rampage.levelsGained;
+      elf.level = elf.level + levelsGained;
                    
 }
 
