@@ -41,10 +41,11 @@ describe("Ethernal Elves Contracts", function () {
   
   //owner and beff are dev wallets. addr3 and addr4 will be used to test the game and transfer/banking functions
   
-  const MetadataHandler = await ethers.getContractFactory("ElfMetadataHandler");
+  const MetadataHandler = await ethers.getContractFactory("ElfMetadataHandlerV2");
   const Miren = await ethers.getContractFactory("Miren");
   //const Elves = await ethers.getContractFactory("EthernalElves");
   const Elves = await ethers.getContractFactory("EthernalElvesV4");
+  const Pelves = await ethers.getContractFactory("EETest");
   const Campaigns = await ethers.getContractFactory("ElfCampaignsV3");
   const Terminus = await ethers.getContractFactory("ElvesTerminus");
   //const Bridge = await ethers.getContractFactory("FxBaseRootTunnel");
@@ -83,7 +84,12 @@ describe("Ethernal Elves Contracts", function () {
 
   //fxBaseRootTunnel.initialize(terminus.address,terminus.address)
   //fxBaseRootTunnel.setAuth([terminus.address], true)
-  elves = await upgrades.deployProxy(Elves, [owner.address, beff.address]);
+  
+  //FOR ETH
+  //elves = await upgrades.deployProxy(Elves, [owner.address, beff.address]);
+  //FOR POLY
+  elves = await upgrades.deployProxy(Pelves);
+  
   
   inventory = await upgrades.deployProxy(MetadataHandler);
 
@@ -92,7 +98,12 @@ describe("Ethernal Elves Contracts", function () {
   await campaigns.deployed();
   await campaigns.newCamps();
 
-  await elves.setAddresses(ren.address, inventory.address, campaigns.address, "0x80861814a8775de20F9506CF41932E95f80f7035");
+  await elves.setAddresses(inventory.address, "0x80861814a8775de20F9506CF41932E95f80f7035");
+
+  await elves.initializeRampage()
+
+  
+  //await elves.setAddresses(ren.address, inventory.address, campaigns.address, "0x80861814a8775de20F9506CF41932E95f80f7035");
   //await elves.setTerminus(terminus.address);
 
   await inventory.setRace([1,10,11,12,2,3], race1.address)
@@ -118,9 +129,10 @@ describe("Ethernal Elves Contracts", function () {
  //await ren.setMinter(terminus.address, 1)
 
   //await elves.flipWhitelist();
-  await elves.flipMint();
+  //await elves.flipMint();
   await elves.flipActiveStatus();
   await elves.flipTerminal();
+  await elves.setAuth([owner.address, addr3.address], true);
 
 
 
@@ -137,22 +149,43 @@ describe("Ethernal Elves Contracts", function () {
   
 
   describe("Check In, Check Out", function () {
-    it("Stake Sentinels with Contract", async function () {
+    it("Rampage tests", async function () {
 
-      await elves.connect(addr3).mint({ value: ethers.utils.parseEther(mintPrice)});
-
+      let level = 100
+      let sentineClass = 0
+      let race = 1
+      let axa = 0
+      let item = 4
       //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther(".01")});//fail
-      //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther("0.0")});     
+      //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther("0.0")});    
+      
+      //function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class) public returns (uint16 id) {
+        
 
-      let weaponTier = 0
-      let level = 25     
+        await elves.connect(addr3).mint(level,sentineClass,race,axa, item);
+        let takeMoney = "10000000000000000000000"
+        await elves.setAccountBalance(addr3.address, takeMoney)
 
-      await elves.setElfManually(1,1,weaponTier,1,1,level,1,1,1,0)
+      //  function rampage(uint256[] calldata ids, uint256 campaign_, bool tryWeapon_, bool tryAccessories_, bool useitem_, address owner) external {
 
-      await elves.connect(addr3).forging([1], {value: ethers.utils.parseEther("0.04")})
+       // console.log(await elves.attributes(1))
+       // console.log(await elves.elves(1))
+       let tryAxa = true
+       let useItem = true
+       let tryWeapon = true
+
+        await elves.rampage([1],6,tryWeapon, tryAxa, useItem,addr3.address);
+
+     //   console.log(await elves.elves(1))
+
+
+    //  await elves.setElfManually(1,1,weaponTier,1,1,level,1,1,1,0)
+
+     // await elves.connect(addr3).forging([1], {value: ethers.utils.parseEther("0.04")})
 
       console.log(await elves.attributes(1))
       console.log(await elves.elves(1))
+      console.log(await elves.rampages(6))
      
 
 

@@ -6,7 +6,7 @@ import "./DataStructures.sol";
 
 //NOTE: Layer 2 for accessories now goes until index 4
 
-contract ElfMetadataHandler {
+contract ElfMetadataHandlerV2 {
     using DataStructures for DataStructures.Token;
 
     address impl_;
@@ -63,10 +63,10 @@ contract ElfMetadataHandler {
                 abi.encodePacked(
                     header,
                     get(Part.race, race_),
-                    accessoriesIndex <= 4 ? get(Part.accessories, accessories_) : "",//layer 2 armband necklace RANGE AND ASSASSIN
+                    accessoriesIndex <= 3 ? get(Part.accessories, accessories_) : "",//layer 2 armband necklace RANGE AND ASSASSIN
                     get(Part.hair, hair_),
                     primaryWeapon_ == 69 ? "" : get(Part.primaryWeapon, primaryWeapon_),                    
-                    accessoriesIndex > 4 ? get(Part.accessories, accessories_) : "",//layer 5 gloves for druids and spcials DRUID
+                    accessoriesIndex > 3 ? get(Part.accessories, accessories_) : "",//layer 5 gloves for druids and spcials DRUID
                     footer
                 )
             );
@@ -451,7 +451,7 @@ contract ElfMetadataHandler {
                         : "Forbidden Scepter of Lucifer";
             }
             if (id < 18)
-                return id == 16 ? "Daggafeets" : "Decitful Dagger";
+                return id == 16 ? "Daggafeets" : "Deceitful Dagger";
             return id == 18 ? "Cutlass of the Night" : "Axe of Haladan";
         }
 
@@ -511,13 +511,13 @@ contract ElfMetadataHandler {
             if (id < 10) {
                 if (id < 5) {
                     if (id < 3) {
-                        return id == 1 ? "Druid 1" : "Druid 2";
+                        return id == 1 ? "Druid 1" : "Bear";
                     }
-                    return id == 3 ? "Druid 3" : "None";
+                    return id == 3 ? "Liger" : "None";
                 }
                 if (id < 7)
                     return
-                        id == 5 ? "Claws" : "Druid 6";
+                        id == 5 ? "Claws" : "Drus Ruler of The Oaks";
                 return
                     id == 7 ? "Druid 7" : id == 8
                         ? "Necklace"
@@ -526,22 +526,21 @@ contract ElfMetadataHandler {
             if (id <= 15) {
                 if (id < 13) {
                     return
-                        id == 10 ? "Assassin 10" : id == 11
-                            ? "Assassin 11"
-                            : "Assassin 12";
+                        id == 10 ? "Crown of Dahagon " : id == 11
+                            ? "Mechadon's Vizard"
+                            : "Euriel The Protector";
                 }
                 return
-                    id == 13 ? "Assassin 13" : id == 14 ? "Assassin 14" : "Wristband";
+                    id == 13 ? "Kidor The Slayer of Demons" : id == 14 ? "Lord Mecha Aker" : "Wristband";
                       }
             if (id < 18)
-                return id == 16 ? "Wristband & Necklace" : "Range 17";
-            return id == 18 ? "Range 18" : "Range 19";
+                return id == 16 ? "Wristband & Necklace" : "Azrael's Crest";
+            return id == 18 ? "El Machina" : "Eriel Angel of Nature";
         }
             if (id < 22) {
                     return
-                        id == 20 ? "Range 20" : "Range 21";
-                }
-        
+                        id == 20 ? "Khonsuna Demon Destroyer" : "Lord Machina Ethena";
+                }        
        
         
     }

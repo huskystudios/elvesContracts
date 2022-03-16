@@ -384,8 +384,7 @@ function _gameEngine(uint256 _campId, uint256 _sector, uint256 _level, uint256 _
   
   attackTime = attackTime > 0 ? attackTime * TIME_CONSTANT : 0;
   
-  timestamp = REGEN_TIME/(_healthPoints) + (block.timestamp + attackTime);
-  
+  timestamp = REGEN_TIME/(_healthPoints) + (block.timestamp + attackTime);  
 
 }
 

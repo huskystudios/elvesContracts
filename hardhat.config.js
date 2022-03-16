@@ -38,11 +38,14 @@ module.exports = {
     mocha: {
       timeout: 120000
     },
+    
    networks: {
       hardhat: { 
-         forking: {
-         url: POLYGON_API_URL,//MAINNET_API_URL,
-          }
+         gas: 12000000,
+         blockGasLimit: 0x1fffffffffffff,
+         allowUnlimitedContractSize: true,
+         timeout: 1800000
+         //forking: {         url: POLYGON_API_URL,//MAINNET_API_URL,          }
       },
       mainnet: {
          url: MAINNET_API_URL,

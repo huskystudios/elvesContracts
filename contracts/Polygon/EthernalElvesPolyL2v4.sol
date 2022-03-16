@@ -5,6 +5,16 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "./ERC721.sol"; 
 import "./../DataStructures.sol";
 import "./../Interfaces.sol";
+import "hardhat/console.sol";
+
+/*
+███████╗████████╗██╗░░██╗███████╗██████╗░███╗░░██╗░█████╗░██╗░░░░░  ███████╗██╗░░░░░██╗░░░██╗███████╗░██████╗
+██╔════╝╚══██╔══╝██║░░██║██╔════╝██╔══██╗████╗░██║██╔══██╗██║░░░░░  ██╔════╝██║░░░░░██║░░░██║██╔════╝██╔════╝
+█████╗░░░░░██║░░░███████║█████╗░░██████╔╝██╔██╗██║███████║██║░░░░░  █████╗░░██║░░░░░╚██╗░██╔╝█████╗░░╚█████╗░
+██╔══╝░░░░░██║░░░██╔══██║██╔══╝░░██╔══██╗██║╚████║██╔══██║██║░░░░░  ██╔══╝░░██║░░░░░░╚████╔╝░██╔══╝░░░╚═══██╗
+███████╗░░░██║░░░██║░░██║███████╗██║░░██║██║░╚███║██║░░██║███████╗  ███████╗███████╗░░╚██╔╝░░███████╗██████╔╝
+╚══════╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝╚══════╝  ╚══════╝╚══════╝░░░╚═╝░░░╚══════╝╚═════╝░
+*/
 
 // We are the Ethernal. The Ethernal Elves         
 // Written by 0xHusky & Beff Jezos. Everything is on-chain for all time to come.
@@ -23,8 +33,11 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     IElfMetaDataHandler elfmetaDataHandler;
         
     using ECDSA for bytes32;
-    
-//STATE   
+
+/*
+█▀ ▀█▀ ▄▀█ ▀█▀ █▀▀   █░█ ▄▀█ █▀█ █▀
+▄█ ░█░ █▀█ ░█░ ██▄   ▀▄▀ █▀█ █▀▄ ▄█
+*/
 
     bool public isGameActive;
     bool public isTerminalOpen;
@@ -104,24 +117,21 @@ contract PolyEthernalElvesV4 is PolyERC721 {
        TIME_CONSTANT = 1 hours; 
        REGEN_TIME = 300 hours; 
 
-       rampages[1] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[2] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:10, maxLevel:100, renCost:1, count:100});
-       rampages[3] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:15, maxLevel:20, renCost:1, count:100});
-       rampages[4] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[5] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[6] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:99, maxLevel:100, renCost:1, count:100});    
-
     }
+    
 
     function initializeRampage() public {
     
        require(!isRampageInit, "Already initialized");
-       rampages[1] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[2] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[3] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[4] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[5] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});
-       rampages[6] = Rampages({probDown: 30, probSame: 50, propUp: 20, levelsGained: 1, minLevel:1, maxLevel:100, renCost:1, count:100});       
+       rampages[1] = Rampages({probDown:  0, probSame:  0, propUp:  0, levelsGained: 3, minLevel: 1, maxLevel:100, renCost: 75,  count:10000});
+       rampages[2] = Rampages({probDown:  0, probSame:  0, propUp:  0, levelsGained: 5, minLevel:60, maxLevel:100, renCost:125,  count:8000});
+       //Accessories
+       rampages[3] = Rampages({probDown: 20, probSame: 50, propUp: 30, levelsGained: 0, minLevel:60, maxLevel:100, renCost:300,  count:4000});
+       rampages[4] = Rampages({probDown:  5, probSame: 30, propUp: 65, levelsGained: 0, minLevel:60, maxLevel:100, renCost:600,  count:2000});
+       rampages[5] = Rampages({probDown:  0, probSame: 10, propUp: 90, levelsGained: 0, minLevel:75, maxLevel:100, renCost:1200, count:665});
+       //Morphset
+       rampages[6] = Rampages({probDown:  0, probSame: 50, propUp: 50, levelsGained: 0, minLevel:99, maxLevel:100, renCost:5000, count:100});       
+       rampages[7] = Rampages({probDown:  0, probSame: 50, propUp: 50, levelsGained: 0, minLevel:99, maxLevel:100, renCost:6500, count:100});       
        ////REMOVE THIS AFTER TESTING
     }
 
@@ -138,7 +148,10 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     
 
 
-//EVENTS
+/*
+█▀▀ █░█ █▀▀ █▄░█ ▀█▀ █▀
+██▄ ▀▄▀ ██▄ █░▀█ ░█░ ▄█
+*/
 
     event Action(address indexed from, uint256 indexed action, uint256 indexed tokenId);         
     event BalanceChanged(address indexed owner, uint256 indexed amount, bool indexed subtract);
@@ -160,86 +173,11 @@ contract PolyEthernalElvesV4 is PolyERC721 {
         }
     }
 
-//////////////EXPORT TO OTHER CHAINS/////////////////
 
-
-
-function checkIn(uint256[] calldata ids, uint256 renAmount, address owner) public returns (bool) {
-     
-        onlyOperator();
-        require(isTerminalOpen, "Terminal is closed");         
-         uint256 travelers = ids.length;
-         if (travelers > 0) {
-
-                    for (uint256 index = 0; index < ids.length; index++) {  
-                        _actions(ids[index], 0, owner, 0, 0, false, false, false, 0);
-                        emit CheckIn(owner, block.timestamp, ids[index], sentinels[ids[index]]);
-                        sentinels[ids[index]] = 0; //scramble their bwainz
-                    }
-                  
-          }
-
-            if (renAmount > 0) {
-
-                    if(bankBalances[owner] - renAmount >= 0) {                      
-                        _setAccountBalance(owner, renAmount, true);
-                        emit RenTransferOut(owner,block.timestamp,renAmount);
-                    }
-             }
-    
-
-}
-
- function checkOutRen(uint256[] calldata renAmounts, bytes[] memory renSignatures, uint256[] calldata timestamps, address[] calldata owners) public returns (bool) {
-   
-   onlyOperator();
-    require(isTerminalOpen, "Terminal is closed"); 
-    
-
-        for(uint i = 0; i < owners.length; i++){
-             require(usedRenSignatures[renSignatures[i]] == 0, "Signature already used");   
-             require(_isSignedByValidator(encodeRenForSignature(renAmounts[i], owners[i], timestamps[i]),renSignatures[i]), "incorrect signature");
-             usedRenSignatures[renSignatures[i]] = 1;
-             
-             bankBalances[owners[i]] += renAmounts[i];     
-             emit RenTransferedIn(owners[i], renAmounts[i]);    
-        }
-
-            
-       
-    }
-    
-
-
-function encodeRenForSignature(uint256 renAmount, address owner, uint256 timestamp) public pure returns (bytes32) {
-     return keccak256(
-            abi.encodePacked("\x19Ethereum Signed Message:\n32", 
-                keccak256(
-                        abi.encodePacked(renAmount, owner, timestamp))
-                        )
-                    );
-}  
-  
-function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private view returns (bool) {
-    
-    bytes32 r;
-    bytes32 s;
-    uint8 v;
-           assembly {
-                r := mload(add(_signature, 0x20))
-                s := mload(add(_signature, 0x40))
-                v := byte(0, mload(add(_signature, 0x60)))
-            }
-        
-            address signer = ecrecover(_hash, v, r, s);
-            return signer == polyValidator;
-  
-}
-
-
-/////////////////////////////////////////////////////////////////
-
-//GAMEPLAY//
+/*
+█▀▀ ▄▀█ █▀▄▀█ █▀▀ █▀█ █░░ ▄▀█ █▄█
+█▄█ █▀█ █░▀░█ ██▄ █▀▀ █▄▄ █▀█ ░█░
+*/
 
 
     function sendCampaign(uint256[] calldata ids, uint256 campaign_, uint256 sector_, bool rollWeapons_, bool rollItems_, bool useitem_, address owner) external {
@@ -323,7 +261,11 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
           }
     }     
 
-///////Primary game loop//////////////////////
+
+/*
+█ █▄░█ ▀█▀ █▀▀ █▀█ █▄░█ ▄▀█ █░░ █▀
+█ █░▀█ ░█░ ██▄ █▀▄ █░▀█ █▀█ █▄▄ ▄█
+*/
 
         function _actions(
             uint256 id_, 
@@ -362,8 +304,7 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
                 }else if(action == 2){//campaign loop 
 
                     require(elf.timestamp < block.timestamp, "elf busy");
-                    require(elf.action != 3, "exit passive mode first");                   
-                
+                    require(elf.action != 3, "exit passive mode first"); 
 
                         (elf.level, actions.reward, elf.timestamp, elf.inventory) = _campaignsEngine(campaign_, sector_, elf.level, elf.attackPoints, elf.healthPoints, elf.inventory, useItem);
 
@@ -485,6 +426,8 @@ function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private vi
                 
                 }else if(action == 11){//Rampage
                         require(elf.action != 3, "cant rampage while passive"); //Archer?
+                        require(elf.timestamp < block.timestamp, "elf busy");
+                        
                         //in rampage you can get accessories or weapons.
                        (elf, actions) = _rampage(elf, actions, campaign_, id_, elfOwner, rollWeapons, rollItems, useItem);
                 
@@ -599,17 +542,20 @@ function _rampage(
             ){
 
         Rampages memory rampage = rampages[_campId];  
-        uint256 rampageCost = uint256(rampage.renCost * 1 ether); //needed to
-        //assign values to the return struct.
+         
+        uint256 rampageCost = uint256(rampage.renCost); //needed to
+        rampageCost = rampageCost * (1 ether);
+       
         elf = _elf;
-        actions = _actions;
+        actions = _actions;        
 
         require(rampage.minLevel <= elf.level, "level too low");
         require(rampage.maxLevel >= elf.level, "level too high"); 
         require(rampage.count > 0, "no rampage left, much sad");
         require(bankBalances[elfOwner] >= rampageCost, "Not Enough Ren to rampage");
         
-        rampage.count = rampage.count - 1;
+       
+         rampages[_campId].count = rampage.count - 1;
         _setAccountBalance(elfOwner, rampageCost, true);
 
         uint256 cooldown = 36 hours;
@@ -617,13 +563,17 @@ function _rampage(
 
         uint256  chance = uint256(_randomize(_rand(), "Rampage", _id)) % 100;
 
-        if(_campId == 6){
+        console.log("chance", chance);
+
+        if(_campId == 6 || _campId == 7){
             //Untamed Ether for DRUID Morphs
            require(elf.sentinelClass == 0, "Only Druids can go here");
            if(chance <= 50){
                elf.accessories = 1;
+               console.log("liger");
            }else{
                elf.accessories = 2;
+               console.log("bear");
            }
         }
 
@@ -644,6 +594,8 @@ function _rampage(
                             if(chance > 0 && chance <= rampage.probDown){
                                 //downgrade
                                 //dont downgrade if already 0
+                                console.log("elf axa");
+                                console.log(elf.accessories);
                                 elf.accessories = elf.accessories == 0 ? 0 : elf.accessories - 1;
 
                             }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
@@ -686,7 +638,11 @@ function _rampage(
         
       elf.timestamp = block.timestamp + cooldown;
       elf.level = elf.level + levelsGained;
-
+        
+        console.log(
+            "level gained"
+        );
+         console.log(elf.level);
                    
 }
 
@@ -709,46 +665,43 @@ function _getAbilities(uint256 _attackPoints, uint256 _accesssories, uint256 sen
  actions_.healTime = 12 hours;
  actions_.instantKillModifier = 0;
 
- //load ability based on accessory
- // +40 AP for BEAR / LIGER
- // SINS 80% Instant Kill
- // +20 AP for RANGERS 4x AP
-
  _accesssories = ((7 * sentinelClass) + _accesssories) + 1;
 
-
         //if Druid 
-        if(_accesssories == 1){
-            //Bear
+        if(_accesssories == 2){
+        //Bear
             _attackPoints = _attackPoints + 30;
 
-        }else if (_accesssories == 2){
-            //Liger
+        }else if (_accesssories == 3){
+        //Liger
             actions_.healTime = 4 hours;        
         
         }else if(_accesssories == 10){
-        //if Assassin 3
+        //if Assassin 3 Crown of Dahagon 
             actions_.instantKillModifier = 15;
 
-
         }else if(_accesssories == 11){
-        //if Assassin 4
-            actions_.instantKillModifier = 25;
-              
+        //if Assassin 4 Mechadon's Vizard
+            actions_.instantKillModifier = 25;              
 
         } else if(_accesssories == 17){
-        //if Ranger 3 
+        //if Ranger 3 Azrael's Crest
             _attackPoints = _attackPoints * 115/100;
 
-
         }else if(_accesssories == 18){
-        //if Ranger 4
-            _attackPoints = _attackPoints * 125/100;
-              
+        //if Ranger 4 El Machina
+            _attackPoints = _attackPoints * 125/100;             
 
         }        
- 
- 
+
+        //1 for 1 special abilities
+        if(_accesssories == 12 || _accesssories == 13 || _accesssories == 14){
+            //Assassin
+            actions_.instantKillModifier = 35;
+        }else if(_accesssories == 19 || _accesssories == 20 || _accesssories == 21){
+            //Ranger
+            _attackPoints = _attackPoints * 135/100;
+        }  
 
 }
 
@@ -829,9 +782,6 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
         return timestamp_;    
                 
     }
-
-        
-
     
 
     function _setAccountBalance(address _owner, uint256 _amount, bool _subtract) private {
@@ -847,7 +797,11 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
     function _rand() internal view returns (uint256) {
     return uint256(keccak256(abi.encodePacked(msg.sender, block.difficulty, block.timestamp, block.basefee, ketchup)));}
 
-//PUBLIC VIEWS
+/*
+█▀█ █░█ █▄▄ █░░ █ █▀▀   █░█ █ █▀▀ █░█░█ █▀
+█▀▀ █▄█ █▄█ █▄▄ █ █▄▄   ▀▄▀ █ ██▄ ▀▄▀▄▀ ▄█
+*/
+
     function tokenURI(uint256 _id) external view returns(string memory) {
     return elfmetaDataHandler.getTokenURI(uint16(_id), sentinels[_id]);
     }
@@ -891,7 +845,12 @@ function elves(uint256 _id) external view returns(address owner, uint timestamp,
 
 }
 
-//Modifiers but as functions. Less Gas
+/*
+
+█▀▄▀█ █▀█ █▀▄ █ █▀▀ █ █▀▀ █▀█ █▀
+█░▀░█ █▄█ █▄▀ █ █▀░ █ ██▄ █▀▄ ▄█
+*/
+
     function isPlayer() internal {    
         uint256 size = 0;
         address acc = msg.sender;
@@ -909,19 +868,83 @@ function elves(uint256 _id) external view returns(address owner, uint timestamp,
         require(admin == msg.sender);
     }
 
-    function modifyElfDNA(uint256[] calldata ids, uint256[] calldata sentinel) external {
-        require (msg.sender == operator || admin == msg.sender || auth[msg.sender] == true, "not allowed");      
-        
-        for(uint i = 0; i < ids.length; i++){
+
+/*
+█▀█ █▀█ █ █▀ █▀▄▀█   █▄▄ █▀█ █ █▀▄ █▀▀ █▀▀
+█▀▀ █▀▄ █ ▄█ █░▀░█   █▄█ █▀▄ █ █▄▀ █▄█ ██▄
+*/
+
+
+        function checkIn(uint256[] calldata ids, uint256 renAmount, address owner) public returns (bool) {
             
-            sentinels[ids[i]] = sentinel[i];
+                onlyOperator();
+                require(isTerminalOpen, "Terminal is closed");         
+                uint256 travelers = ids.length;
+                if (travelers > 0) {
+
+                            for (uint256 index = 0; index < ids.length; index++) {  
+                                _actions(ids[index], 0, owner, 0, 0, false, false, false, 0);
+                                emit CheckIn(owner, block.timestamp, ids[index], sentinels[ids[index]]);
+                                sentinels[ids[index]] = 0; //scramble their bwainz
+                            }
+                        
+                }
+
+                    if (renAmount > 0) {
+
+                            if(bankBalances[owner] - renAmount >= 0) {                      
+                                _setAccountBalance(owner, renAmount, true);
+                                emit RenTransferOut(owner,block.timestamp,renAmount);
+                            }
+                    }
             
-            emit ElfTransferedIn(ids[i], sentinel[i]);
 
         }
+
+        function checkOutRen(uint256[] calldata renAmounts, bytes[] memory renSignatures, uint256[] calldata timestamps, address[] calldata owners) public returns (bool) {
         
+        onlyOperator();
+            require(isTerminalOpen, "Terminal is closed"); 
+            
+
+                for(uint i = 0; i < owners.length; i++){
+                    require(usedRenSignatures[renSignatures[i]] == 0, "Signature already used");   
+                    require(_isSignedByValidator(encodeRenForSignature(renAmounts[i], owners[i], timestamps[i]),renSignatures[i]), "incorrect signature");
+                    usedRenSignatures[renSignatures[i]] = 1;
+                    
+                    bankBalances[owners[i]] += renAmounts[i];     
+                    emit RenTransferedIn(owners[i], renAmounts[i]);    
+                }            
+            
+            }
+            
+
+
+        function encodeRenForSignature(uint256 renAmount, address owner, uint256 timestamp) public pure returns (bytes32) {
+            return keccak256(
+                    abi.encodePacked("\x19Ethereum Signed Message:\n32", 
+                        keccak256(
+                                abi.encodePacked(renAmount, owner, timestamp))
+                                )
+                            );
+        }  
         
-    }
+        function _isSignedByValidator(bytes32 _hash, bytes memory _signature) private view returns (bool) {
+            
+            bytes32 r;
+            bytes32 s;
+            uint8 v;
+                assembly {
+                        r := mload(add(_signature, 0x20))
+                        s := mload(add(_signature, 0x40))
+                        v := byte(0, mload(add(_signature, 0x60)))
+                    }
+                
+                    address signer = ecrecover(_hash, v, r, s);
+                    return signer == polyValidator;
+        
+        }
+
 
     function prismBridge(uint256[] calldata ids, uint256[] calldata sentinel) external {
         require (msg.sender == operator || admin == msg.sender || auth[msg.sender] == true, "not allowed");
@@ -936,12 +959,14 @@ function elves(uint256 _id) external view returns(address owner, uint timestamp,
             
             emit ElfTransferedIn(ids[i], sentinel[i]);
 
-        }
-        
+        }       
         
     }
 
-
+/*
+▄▀█ █▀▄ █▀▄▀█ █ █▄░█   █▀▀ █░█ █▄░█ █▀▀ ▀█▀ █ █▀█ █▄░█ █▀
+█▀█ █▄▀ █░▀░█ █ █░▀█   █▀░ █▄█ █░▀█ █▄▄ ░█░ █ █▄█ █░▀█ ▄█
+*/
 function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 expPoints_, uint16 creatureHealth_, uint16 minLevel_, uint16 maxLevel_) external      
     {
         onlyOwner();
@@ -975,21 +1000,8 @@ function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 
     
     
    function setAccountBalance(address _owner, uint256 _amount) public {                
-        onlyOperator();
+        onlyOwner();
         bankBalances[_owner] += _amount;
-    }
-
-    function setAccountBalances(address[] calldata _owners, uint256[] calldata _amounts) public {                
-        onlyOperator();
-
-          for(uint i = 0; i < _owners.length; i++){
-            
-           bankBalances[_owners[i]] += _amounts[i];     
- 
-           emit RenTransferedIn(_owners[i], _amounts[i]);                 
-
-        }
-       
     }
 
     function setElfManually(uint id, uint8 _primaryWeapon, uint8 _weaponTier, uint8 _attackPoints, uint8 _healthPoints, uint8 _level, uint8 _inventory, uint8 _race, uint8 _class, uint8 _accessories) external {
@@ -1017,25 +1029,13 @@ function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 
         
     }
 
-    //Note: This function has been added to help someone who got scammed and lost his elves.     
     function changeElfOwner(address elfOwner, uint id) external {
         onlyOwner();
         DataStructures.Elf memory elf = DataStructures.getElf(sentinels[id]);
         DataStructures.ActionVariables memory actions;
 
         elf.owner           = elfOwner;
-        elf.timestamp       = elf.timestamp;
-        elf.action          = elf.action;
-        elf.healthPoints    = elf.healthPoints;
-        elf.attackPoints    = elf.attackPoints;
-        elf.primaryWeapon   = elf.primaryWeapon;
-        elf.level           = elf.level;
-        elf.weaponTier      = elf.weaponTier;
-        elf.inventory       = elf.inventory;
-        elf.race            = elf.race;
-        elf.sentinelClass   = elf.sentinelClass;
-        elf.accessories     = elf.accessories;
-
+       
         actions.traits = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
         actions.class =  DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
                        
@@ -1043,20 +1043,68 @@ function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 
         
     }
 
-    //////////////Remove beofre deploy live
-
-    
-    function initMint(uint256 start, uint256 end) external {
-        
+    function changeElfAccessory(uint8 accessoryIndex, uint id) external {
+       
         onlyOwner();
+        DataStructures.Elf memory elf = DataStructures.getElf(sentinels[id]);
+        DataStructures.ActionVariables memory actions;
+        require(accessoryIndex <=7, "accessory index out of range");
 
-        for (uint256 i = start; i < end; i++) {
-            _mint( address(this), i);
-        }
-    
+        elf.accessories = accessoryIndex;
+       
+        actions.traits = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
+        actions.class =  DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
+                       
+        sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
+        
     }
-    
 
+    function changeElfLevel(uint8 level, uint id) external {
+       
+        onlyOwner();
+        DataStructures.Elf memory elf = DataStructures.getElf(sentinels[id]);
+        DataStructures.ActionVariables memory actions;
+        require(level <=255, "level out of range");
+
+        elf.level = level;
+       
+        actions.traits = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
+        actions.class =  DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
+                       
+        sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
+        
+    }
+
+    function changeElfItem(uint8 inventory, uint id) external {
+       
+        onlyOwner();
+        DataStructures.Elf memory elf = DataStructures.getElf(sentinels[id]);
+        DataStructures.ActionVariables memory actions;
+        require(inventory <=6, "item index out of range");
+
+        elf.inventory = inventory;
+       
+        actions.traits = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
+        actions.class =  DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
+                       
+        sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
+        
+    }  
+
+    function modifyElfDNA(uint256[] calldata ids, uint256[] calldata sentinel) external {
+       onlyOwner();  
+        
+        for(uint i = 0; i < ids.length; i++){
+            
+            sentinels[ids[i]] = sentinel[i];
+            
+            emit ElfTransferedIn(ids[i], sentinel[i]);
+
+        }        
+        
+    } 
     
 
 }
+
+
