@@ -20,7 +20,7 @@ import "./EthernalElvesPolyL2v4.sol";
 contract EETest is PolyEthernalElvesV4 {
 
 /////////THIS CODE IS NOT TO BE USED IN PROD
- function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class, uint8 _item) public returns (uint16 id) {
+ function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class, uint8 _item, uint8 _weapon) public returns (uint16 id) {
         
             uint256 rand = _rand();
           
@@ -36,7 +36,7 @@ contract EETest is PolyEthernalElvesV4 {
                 
                 elf.inventory = _item;
                 
-                elf.primaryWeapon = 69; //69 is the default weapon - fists.
+                elf.primaryWeapon = _weapon;
 
                 elf.level = _level;
 

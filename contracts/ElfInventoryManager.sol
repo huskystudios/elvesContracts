@@ -2,9 +2,6 @@
 pragma solidity 0.8.7;
 
 import "./DataStructures.sol";
-//import "hardhat/console.sol";
-
-//NOTE: Layer 2 for accessories now goes until index 4
 
 contract ElfMetadataHandlerV2 {
     using DataStructures for DataStructures.Token;
@@ -56,20 +53,53 @@ contract ElfMetadataHandlerV2 {
     ) public view returns (string memory) {
       
         uint8 accessoriesIndex = (accessories_ - 1) % 7; 
-        //console.log("AI",accessoriesIndex);
-        //console.log("a",accessories_);
-        return
-            string(
+        bool specialBool = false;
+        bool morphBool = false;
+
+        
+        if(sentinelClass_ == 0 && (accessoriesIndex == 1 || accessoriesIndex == 2)) {
+            morphBool = true;
+        }
+        
+        if((sentinelClass_ != 0 && accessoriesIndex >= 4) || (sentinelClass_ == 0 && accessoriesIndex >= 5)) {
+            specialBool = true;
+        }
+
+        string memory druidMorph =  string(
                 abi.encodePacked(
                     header,
-                    get(Part.race, race_),
-                    accessoriesIndex <= 3 ? get(Part.accessories, accessories_) : "",//layer 2 armband necklace RANGE AND ASSASSIN
+                    get(Part.accessories, accessories_),
+                    get(Part.race, race_),                    
                     get(Part.hair, hair_),
-                    primaryWeapon_ == 69 ? "" : get(Part.primaryWeapon, primaryWeapon_),                    
-                    accessoriesIndex > 3 ? get(Part.accessories, accessories_) : "",//layer 5 gloves for druids and spcials DRUID
+                    primaryWeapon_ == 69 ? "" : get(Part.primaryWeapon, primaryWeapon_),                                        
                     footer
                 )
             );
+
+
+        string memory sentinel =  string(
+                abi.encodePacked(
+                    header,
+                    get(Part.race, race_),
+                    accessoriesIndex <= 1 ? get(Part.accessories, accessories_) : "",//layer 2 armband necklace RANGE AND ASSASSIN
+                    get(Part.hair, hair_),
+                    accessoriesIndex <= 3 ? get(Part.accessories, accessories_) : "",//layer 4 is for body armor
+                    primaryWeapon_ == 69 ? "" : get(Part.primaryWeapon, primaryWeapon_),     
+                    accessoriesIndex == 4 ? get(Part.accessories, accessories_) : "",//layer 6 is for Druid claws.
+                    footer
+                )
+            );
+
+        string memory uniques =  string(
+                abi.encodePacked(
+                    header,
+                    get(Part.accessories, accessories_), 
+                    footer
+                )
+            );    
+
+        return morphBool ? druidMorph : specialBool ? uniques : sentinel;
+          
     }
 
     function getTokenURI(uint16 id_, uint256 sentinel)
@@ -78,9 +108,7 @@ contract ElfMetadataHandlerV2 {
         returns (string memory)
     {
         DataStructures.Token memory token = DataStructures.getToken(sentinel);
-         //console.log( token.primaryWeapon);
-         //console.log( token.weaponTier);
-
+        
         string memory svg = Base64.encode(
             bytes(
                 getSVG(
@@ -102,7 +130,7 @@ contract ElfMetadataHandlerV2 {
                             abi.encodePacked(
                                 '{"name":"Elf #',
                                 toString(id_),
-                                '", "description":"EthernalElves is a collection of 6666 Sentinel Elves racing to awaken the Elders. With no IPFS or API, these Elves a 100% on-chain. Play EthernalElves to upgrade your abilities and grow your army. !onward", "image": "',
+                                '", "description":"EthernalElves is a collection of 6666 Sentinel Elves racing to awaken the Elders. These Elves a 100% on-chain. Play EthernalElves to upgrade your abilities and grow your army. !onward", "image": "',
                                 "data:image/svg+xml;base64,",
                                 svg,
                                 '",',

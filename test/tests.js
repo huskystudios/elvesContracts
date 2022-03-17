@@ -61,6 +61,9 @@ describe("Ethernal Elves Contracts", function () {
   const Weapons5 = await ethers.getContractFactory("Weapons5");
   const Weapons6 = await ethers.getContractFactory("Weapons6");
   const Accessories = await ethers.getContractFactory("Accessories1");
+  const Accessories3 = await ethers.getContractFactory("Accessories3");
+  const Accessories4 = await ethers.getContractFactory("Accessories4"); 
+  const Accessories5 = await ethers.getContractFactory("Accessories5"); //THIS IS NOT FINAL
 
   const hair = await Hair.deploy();
   const race1 = await Race1.deploy();
@@ -72,6 +75,9 @@ describe("Ethernal Elves Contracts", function () {
   const weapons5 = await Weapons5.deploy();
   const weapons6 = await Weapons6.deploy();
   const accessories = await Accessories.deploy();
+  const accessories3 = await Accessories3.deploy();
+  const accessories4 = await Accessories4.deploy();
+  const accessories5 = await Accessories5.deploy();
   
   ///Body x 3, Hair x 3, Weapons x 3, 
   
@@ -119,6 +125,9 @@ describe("Ethernal Elves Contracts", function () {
   await inventory.setWeapons([43,44,45,5,6,7,8,9, 69], weapons6.address)
 
   await inventory.setAccessories([15,16,4,5,8,9,1,2,3,6,7,10,11,12,13,14,17,18,19,20,21], accessories.address)
+  await inventory.setAccessories([2,3], accessories3.address)
+  await inventory.setAccessories([10,11,17,18], accessories4.address)  
+  await inventory.setAccessories([6,13,20], accessories5.address)
    
 //  await campaigns.initialize(elves.address);
 
@@ -152,17 +161,18 @@ describe("Ethernal Elves Contracts", function () {
     it("Rampage tests", async function () {
 
       let level = 100
-      let sentineClass = 0
-      let race = 1
-      let axa = 0
+      let sentineClass = 2
+      let race = 0
+      let axa = 5
       let item = 4
+      let weapon = 1
       //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther(".01")});//fail
       //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther("0.0")});    
       
       //function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class) public returns (uint16 id) {
         
 
-        await elves.connect(addr3).mint(level,sentineClass,race,axa, item);
+        await elves.connect(addr3).mint(level,axa,race,sentineClass, item, weapon);
         let takeMoney = "10000000000000000000000"
         await elves.setAccountBalance(addr3.address, takeMoney)
 
@@ -174,7 +184,7 @@ describe("Ethernal Elves Contracts", function () {
        let useItem = true
        let tryWeapon = true
 
-        await elves.rampage([1],6,tryWeapon, tryAxa, useItem,addr3.address);
+       // await elves.rampage([1],6,tryWeapon, tryAxa, useItem,addr3.address);
 
      //   console.log(await elves.elves(1))
 
@@ -186,6 +196,10 @@ describe("Ethernal Elves Contracts", function () {
       console.log(await elves.attributes(1))
       console.log(await elves.elves(1))
       console.log(await elves.rampages(6))
+
+      console.log(await elves.tokenURI(1))
+
+      
      
 
 

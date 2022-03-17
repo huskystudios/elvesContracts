@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-    "txHash": "0x23ab804257495a32a9a83d0ad6eeec119f960a2ac0b27688205f46ed492c39c2"
+    "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
+    "txHash": "0x034632f1c0cd701d9b80ab3669ff01b1f7930e8e892878dc7758a12b72e66631"
   },
   "proxies": [
     {
@@ -31,16 +31,6 @@
       "kind": "transparent"
     },
     {
-      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
-      "txHash": "0x55c5d2832130de382c8eca6fff375fe524e53a7c5f8a297afe7fe2aab01d6b3d",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
-      "txHash": "0xfcd486227137377c5f292416dd71e82ca02372730a74ae625222c540ac653c7b",
-      "kind": "transparent"
-    },
-    {
       "address": "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
       "txHash": "0xfd47cfe785c0588b55943b094e3358a6bca78434b778dc767f13661f5d151d26",
       "kind": "transparent"
@@ -51,93 +41,70 @@
       "kind": "transparent"
     },
     {
+      "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
+      "txHash": "0xf5b6eed35ea845562ee8e229f07b209836e7e31fd0e1e2aa290079f54e71074e",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+      "txHash": "0x67ccce857e9453f67ecc7ada9fe3db878da320602beaa2c2221f43ae452a6596",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+      "txHash": "0x362b915459aa946bfe3a6fa7e4fbbb6fb0db776067a081caaf79d6bbde98d0dd",
+      "kind": "transparent"
+    },
+    {
       "address": "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
-      "txHash": "0xdfdcee8bb079805259e8c44f09074559daed1f7e52efb161bc0d2cf1182f2dbc",
+      "txHash": "0xd013adc9fc2280209845fdbb2ac20419f0a6210214f42c340ed761eb5837fba1",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xb7278A61aa25c888815aFC32Ad3cC52fF24fE575",
+      "txHash": "0xe62900c0f39bad323416706ce24bb31ec90d150380e97cc636cbd91dc234cbfd",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+      "txHash": "0x41168cde80c5c0b4c2f8ffa039622110e58750db76761eab93aaf677b449518e",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      "txHash": "0x22b19d9b6550f63a068c76aa8311341950ab88cd0c2d6b67c268ced9419fd898",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+      "txHash": "0xda97cd85988761840532c96afb1c2e7f5a9c658ee99a5c24a33378d6db6f9b53",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+      "txHash": "0xf93faebccde0f1cf60518e4f37c4259f49b4b3d44e4dabd51232b6d26754f3da",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
+      "txHash": "0x6f7c7bb9c21a4c13010127d93ccda3f64ca064ec2e72df64edd1b05480cd767d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x2bdCC0de6bE1f7D2ee689a0342D76F52E8EFABa3",
+      "txHash": "0x35182766f3fef043e3ccf3219c9a8d5d90010747da6a4d34ba05c969976a9742",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7969c5eD335650692Bc04293B07F5BF2e7A673C0",
+      "txHash": "0xf7080b380ecf432ca0e8c77316c07a101ade5b71852389cb9f46eac252a81de4",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "79ff64c1904251e30a59d94eed8df8e586b5882b90cb20ac2c8a82cfc5129c7e": {
-      "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
-      "txHash": "0x7a03436826a75b4d2cf07daa6438cd8a376fd07be81009d33914c8a43d6a288f",
-      "layout": {
-        "storage": [
-          {
-            "label": "impl_",
-            "offset": 0,
-            "slot": "0",
-            "type": "t_address",
-            "contract": "ElfMetadataHandlerV2",
-            "src": "contracts\\ElfInventoryManager.sol:12"
-          },
-          {
-            "label": "manager",
-            "offset": 0,
-            "slot": "1",
-            "type": "t_address",
-            "contract": "ElfMetadataHandlerV2",
-            "src": "contracts\\ElfInventoryManager.sol:13"
-          },
-          {
-            "label": "initialized",
-            "offset": 20,
-            "slot": "1",
-            "type": "t_bool",
-            "contract": "ElfMetadataHandlerV2",
-            "src": "contracts\\ElfInventoryManager.sol:14"
-          },
-          {
-            "label": "race",
-            "offset": 0,
-            "slot": "2",
-            "type": "t_mapping(t_uint8,t_address)",
-            "contract": "ElfMetadataHandlerV2",
-            "src": "contracts\\ElfInventoryManager.sol:23"
-          },
-          {
-            "label": "hair",
-            "offset": 0,
-            "slot": "3",
-            "type": "t_mapping(t_uint8,t_address)",
-            "contract": "ElfMetadataHandlerV2",
-            "src": "contracts\\ElfInventoryManager.sol:24"
-          },
-          {
-            "label": "primaryWeapon",
-            "offset": 0,
-            "slot": "4",
-            "type": "t_mapping(t_uint8,t_address)",
-            "contract": "ElfMetadataHandlerV2",
-            "src": "contracts\\ElfInventoryManager.sol:25"
-          },
-          {
-            "label": "accessories",
-            "offset": 0,
-            "slot": "5",
-            "type": "t_mapping(t_uint8,t_address)",
-            "contract": "ElfMetadataHandlerV2",
-            "src": "contracts\\ElfInventoryManager.sol:26"
-          }
-        ],
-        "types": {
-          "t_address": {
-            "label": "address"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_mapping(t_uint8,t_address)": {
-            "label": "mapping(uint8 => address)"
-          },
-          "t_uint8": {
-            "label": "uint8"
-          }
-        }
-      }
-    },
     "0933981ec54fb323e2b60e1ac2fd2c60c7af8d32fe67079a27bc005e233b4d30": {
-      "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x021a49ad01d1f27c80e53c75053647be5af682402c46329badbed756f5a29afb",
+      "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+      "txHash": "0x04e284d9d3678a2069dca93cf05c2f94575435958a5cbd2d5cda093bc34eff76",
       "layout": {
         "storage": [
           {
@@ -271,9 +238,87 @@
         }
       }
     },
-    "5cbd98605af52f5d9e27cd23f0d7052b236b2e32e3ebb190274b3d377a23708b": {
-      "address": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
-      "txHash": "0xfcda59ed86c02541076e22cb86cb7f9106cec8131b06e7d2147d2ed72f9ecd1f",
+    "04c81cf8f25e60786792853a88f51b09083cc623702ab9bb174b276eb18207d0": {
+      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      "txHash": "0xbca620e25862aade1eb875476cf345c02eb96c55f76ee8857665953c553a643f",
+      "layout": {
+        "storage": [
+          {
+            "label": "impl_",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:12"
+          },
+          {
+            "label": "manager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:13"
+          },
+          {
+            "label": "initialized",
+            "offset": 20,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:14"
+          },
+          {
+            "label": "race",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:23"
+          },
+          {
+            "label": "hair",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:24"
+          },
+          {
+            "label": "primaryWeapon",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:25"
+          },
+          {
+            "label": "accessories",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:26"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_uint8,t_address)": {
+            "label": "mapping(uint8 => address)"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "9dc5715ae170aa6999c1730d74d810b02fcc50dbf8bd117c084ae6e5da4e6ecc": {
+      "address": "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
+      "txHash": "0x6b01544d6e4b1578139087a09c2508074cc659477b6def68a3bb60c1f7145fcb",
       "layout": {
         "storage": [
           {
@@ -352,7 +397,7 @@
             "label": "elfmetaDataHandler",
             "offset": 0,
             "slot": "9",
-            "type": "t_contract(IElfMetaDataHandler)10327",
+            "type": "t_contract(IElfMetaDataHandler)10448",
             "contract": "PolyEthernalElvesV4",
             "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:76"
           },
@@ -456,7 +501,7 @@
             "label": "camps",
             "offset": 0,
             "slot": "19",
-            "type": "t_mapping(t_uint256,t_struct(Camps)17607_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Camps)17730_storage)",
             "contract": "PolyEthernalElvesV4",
             "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:108"
           },
@@ -488,7 +533,7 @@
             "label": "rampages",
             "offset": 0,
             "slot": "23",
-            "type": "t_mapping(t_uint256,t_struct(Rampages)17641_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Rampages)17764_storage)",
             "contract": "PolyEthernalElvesV4",
             "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:118"
           },
@@ -514,7 +559,7 @@
           "t_bytes_memory_ptr": {
             "label": "bytes"
           },
-          "t_contract(IElfMetaDataHandler)10327": {
+          "t_contract(IElfMetaDataHandler)10448": {
             "label": "contract IElfMetaDataHandler"
           },
           "t_mapping(t_address,t_bool)": {
@@ -532,16 +577,16 @@
           "t_mapping(t_uint256,t_address)": {
             "label": "mapping(uint256 => address)"
           },
-          "t_mapping(t_uint256,t_struct(Camps)17607_storage)": {
+          "t_mapping(t_uint256,t_struct(Camps)17730_storage)": {
             "label": "mapping(uint256 => struct PolyEthernalElvesV4.Camps)"
           },
-          "t_mapping(t_uint256,t_struct(Rampages)17641_storage)": {
+          "t_mapping(t_uint256,t_struct(Rampages)17764_storage)": {
             "label": "mapping(uint256 => struct PolyEthernalElvesV4.Rampages)"
           },
           "t_mapping(t_uint256,t_uint256)": {
             "label": "mapping(uint256 => uint256)"
           },
-          "t_struct(Camps)17607_storage": {
+          "t_struct(Camps)17730_storage": {
             "label": "struct PolyEthernalElvesV4.Camps",
             "members": [
               {
@@ -570,7 +615,7 @@
               }
             ]
           },
-          "t_struct(Rampages)17641_storage": {
+          "t_struct(Rampages)17764_storage": {
             "label": "struct PolyEthernalElvesV4.Rampages",
             "members": [
               {
@@ -618,6 +663,84 @@
           },
           "t_bytes_storage": {
             "label": "bytes"
+          }
+        }
+      }
+    },
+    "c973a43eaf057eca5ee0d39b660da63661a280542e6d0bbd34bb599b6a347885": {
+      "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+      "txHash": "0x2c6e2843e950bb03729f020009c370250657bfe2ca735e93b1cd0c2362eac3f2",
+      "layout": {
+        "storage": [
+          {
+            "label": "impl_",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:9"
+          },
+          {
+            "label": "manager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:10"
+          },
+          {
+            "label": "initialized",
+            "offset": 20,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:11"
+          },
+          {
+            "label": "race",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:20"
+          },
+          {
+            "label": "hair",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:21"
+          },
+          {
+            "label": "primaryWeapon",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:22"
+          },
+          {
+            "label": "accessories",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_uint8,t_address)",
+            "contract": "ElfMetadataHandlerV2",
+            "src": "contracts\\ElfInventoryManager.sol:23"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_uint8,t_address)": {
+            "label": "mapping(uint8 => address)"
+          },
+          "t_uint8": {
+            "label": "uint8"
           }
         }
       }

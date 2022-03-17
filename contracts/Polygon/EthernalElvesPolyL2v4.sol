@@ -123,6 +123,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     function initializeRampage() public {
     
        require(!isRampageInit, "Already initialized");
+       isRampageInit = true;
        rampages[1] = Rampages({probDown:  0, probSame:  0, propUp:  0, levelsGained: 3, minLevel: 1, maxLevel:100, renCost: 75,  count:10000});
        rampages[2] = Rampages({probDown:  0, probSame:  0, propUp:  0, levelsGained: 5, minLevel:60, maxLevel:100, renCost:125,  count:8000});
        //Accessories
