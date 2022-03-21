@@ -20,7 +20,7 @@ import "./EthernalElvesPolyL2v4.sol";
 contract EETest is PolyEthernalElvesV4 {
 
 /////////THIS CODE IS NOT TO BE USED IN PROD
- function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class, uint8 _item, uint8 _weapon) public returns (uint16 id) {
+ function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class, uint8 _item, uint8 _weapon, uint8 _weaponTier) public returns (uint16 id) {
         
             uint256 rand = _rand();
           
@@ -32,7 +32,9 @@ contract EETest is PolyEthernalElvesV4 {
                 elf.owner = msg.sender;
                 elf.timestamp = block.timestamp;
                 
-                elf.action = elf.weaponTier = 0;
+                elf.action = 0; 
+                
+                elf.weaponTier = _weaponTier;
                 
                 elf.inventory = _item;
                 

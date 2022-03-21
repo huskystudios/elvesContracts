@@ -18,7 +18,7 @@ import "hardhat/console.sol";
 
 // We are the Ethernal. The Ethernal Elves         
 // Written by 0xHusky & Beff Jezos. Everything is on-chain for all time to come.
-// Version 4.0.0
+// Version 4.0.1
 // Release notes: Adding Rampage and new abilities based on accessories 
 
 contract PolyEthernalElvesV4 is PolyERC721 {
@@ -84,7 +84,6 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                 uint16 renCost;     
                 uint16 count; 
 
-
         }
     
     struct GameVariables {
@@ -117,24 +116,22 @@ contract PolyEthernalElvesV4 is PolyERC721 {
        TIME_CONSTANT = 1 hours; 
        REGEN_TIME = 300 hours; 
 
-    }
-    
+    }    
 
-    function initializeRampage() public {
+    /*function initializeRampage() public {
     
        require(!isRampageInit, "Already initialized");
        isRampageInit = true;
        rampages[1] = Rampages({probDown:  0, probSame:  0, propUp:  0, levelsGained: 3, minLevel: 1, maxLevel:100, renCost: 75,  count:10000});
        rampages[2] = Rampages({probDown:  0, probSame:  0, propUp:  0, levelsGained: 5, minLevel:60, maxLevel:100, renCost:125,  count:8000});
-       //Accessories
+       //Accessories & Weapons
        rampages[3] = Rampages({probDown: 20, probSame: 50, propUp: 30, levelsGained: 0, minLevel:60, maxLevel:100, renCost:300,  count:4000});
-       rampages[4] = Rampages({probDown:  5, probSame: 30, propUp: 65, levelsGained: 0, minLevel:60, maxLevel:100, renCost:600,  count:2000});
-       rampages[5] = Rampages({probDown:  0, probSame: 10, propUp: 90, levelsGained: 0, minLevel:75, maxLevel:100, renCost:1200, count:667});
+       rampages[4] = Rampages({probDown:  5, probSame: 30, propUp: 65, levelsGained: 0, minLevel:75, maxLevel:100, renCost:600,  count:2000});
+       rampages[5] = Rampages({probDown:  0, probSame: 10, propUp: 90, levelsGained: 0, minLevel:99, maxLevel:100, renCost:1200, count:667});
        //Morphset
        rampages[6] = Rampages({probDown:  0, probSame: 50, propUp: 50, levelsGained: 0, minLevel:99, maxLevel:100, renCost:5000, count:100});       
-       rampages[7] = Rampages({probDown:  0, probSame: 50, propUp: 50, levelsGained: 0, minLevel:99, maxLevel:100, renCost:6500, count:100});       
-       ////REMOVE THIS AFTER TESTING
-    }
+       rampages[7] = Rampages({probDown:  0, probSame: 50, propUp: 50, levelsGained: 0, minLevel:99, maxLevel:100, renCost:6500, count:100});              
+    }*/
 
     function setAddresses(address _inventory, address _operator)  public {
        onlyOwner();
@@ -351,7 +348,8 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                     require(elf.action != 3); //Cant roll in passve mode
                     
                     _setAccountBalance(elfOwner, 10 ether, true);
-                    (elf.weaponTier, elf.primaryWeapon, elf.inventory) = DataStructures.roll(id_, elf.level, rand, 2, elf.weaponTier, elf.primaryWeapon, elf.inventory);                      
+                     elf.inventory = _rollitems(id_);
+                    //(elf.weaponTier, elf.primaryWeapon, elf.inventory) = DataStructures.roll(id_, elf.level, rand, 2, elf.weaponTier, elf.primaryWeapon, elf.inventory);                      
 
                 }else if(action == 7){//healing loop
 
@@ -359,6 +357,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                     require(elf.sentinelClass == 0, "not a healer"); 
                     require(elf.action != 3, "cant heal while passive"); //Cant heal in passve mode
                     require(elf.timestamp < block.timestamp, "elf busy");
+
                     
                     elf.timestamp = block.timestamp + (actions.healTime);//change to healtime
 
@@ -410,8 +409,8 @@ contract PolyEthernalElvesV4 is PolyERC721 {
 
                        if(rollItems){
                        
-                        (elf.weaponTier, elf.primaryWeapon, elf.inventory) = DataStructures.roll(id_, elf.level, _rand(), 2, elf.weaponTier, elf.primaryWeapon, elf.inventory);  
-                       
+                       // (elf.weaponTier, elf.primaryWeapon, elf.inventory) = DataStructures.roll(id_, elf.level, _rand(), 2, elf.weaponTier, elf.primaryWeapon, elf.inventory);  
+                       elf.inventory = _rollitems(id_);
                        }    
 
                         
@@ -492,7 +491,10 @@ function _instantKill(uint256 timestamp, uint256 weaponTier, address elfOwner, u
   //Increasing kill chance if the right accessory is equipped
   killChance = killChance + instantKillModifier;
 
+       
+
     if(chance <= killChance){
+      
         timestamp_ = block.timestamp + (4 hours);
         emit BloodThirst(elfOwner, id);
     }else{
@@ -523,6 +525,7 @@ function _bloodthirst(uint256 _campId, uint256 _sector, uint256 weaponTier, uint
   attackTime = attackTime > 0 ? attackTime * TIME_CONSTANT : 0;
   
   timestamp = REGEN_TIME/(_healthPoints) + (block.timestamp + attackTime);
+
 
 }
 
@@ -564,17 +567,15 @@ function _rampage(
 
         uint256  chance = uint256(_randomize(_rand(), "Rampage", _id)) % 100;
 
-        console.log("chance", chance);
-
         if(_campId == 6 || _campId == 7){
             //Untamed Ether for DRUID Morphs
            require(elf.sentinelClass == 0, "Only Druids can go here");
            if(chance <= 50){
                elf.accessories = 1;
-               console.log("liger");
+             
            }else{
                elf.accessories = 2;
-               console.log("bear");
+              
            }
         }
 
@@ -583,28 +584,36 @@ function _rampage(
 
             levelsGained = levelsGained * 2;
             elf.inventory = 0;
+           
 
         }     
-
+  
+  if(_campId > 2)
+  {
             if(tryAccessories){
+
+             //   console.log("here");
 
                     if(elf.accessories <= 3 && elf.sentinelClass != 0){
                         //enter accessories upgrade loop. Not allowed for >3 (one for ones) or druids
-                    
+
                             //if try accessories is true, try to get accessories
                             if(chance > 0 && chance <= rampage.probDown){
                                 //downgrade
                                 //dont downgrade if already 0
-                                console.log("elf axa");
-                                console.log(elf.accessories);
+                                console.log("downgrade: ", chance);
+                                
                                 elf.accessories = elf.accessories == 0 ? 0 : elf.accessories - 1;
 
                             }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
                                     //same
+                                    console.log("same: ", chance);
+                                  
                                     elf.accessories = elf.accessories;
 
                             }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
                                     //upgrade
+                                    console.log("upgrade: ", chance);
                                     elf.accessories = elf.accessories + 1;
 
                             }
@@ -617,16 +626,21 @@ function _rampage(
                   
                     if(tryWeapon){
 
+                       //  console.log("not here");
+
                                     if(chance > 0 && chance <= rampage.probDown){
                                         //downgrade
+                                        
                                         elf.weaponTier = elf.weaponTier - 1 < 1 ? 1 : elf.weaponTier - 1;       
 
                                     }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
                                         //same
+                                       
                                         elf.weaponTier = elf.weaponTier;
 
                                     }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
                                         //upgrade
+                                      
                                         elf.weaponTier = elf.weaponTier + 1;
                                     }
 
@@ -636,14 +650,10 @@ function _rampage(
                         }
 
             }
+  }
         
       elf.timestamp = block.timestamp + cooldown;
       elf.level = elf.level + levelsGained;
-        
-        console.log(
-            "level gained"
-        );
-         console.log(elf.level);
                    
 }
 
@@ -668,10 +678,11 @@ function _getAbilities(uint256 _attackPoints, uint256 _accesssories, uint256 sen
 
  _accesssories = ((7 * sentinelClass) + _accesssories) + 1;
 
+
         //if Druid 
         if(_accesssories == 2){
         //Bear
-            _attackPoints = _attackPoints + 30;
+            attackPoints_ = _attackPoints + 30;
 
         }else if (_accesssories == 3){
         //Liger
@@ -687,11 +698,13 @@ function _getAbilities(uint256 _attackPoints, uint256 _accesssories, uint256 sen
 
         } else if(_accesssories == 17){
         //if Ranger 3 Azrael's Crest
-            _attackPoints = _attackPoints * 115/100;
+            
+            attackPoints_ = _attackPoints * 115/100;
+     
 
         }else if(_accesssories == 18){
         //if Ranger 4 El Machina
-            _attackPoints = _attackPoints * 125/100;             
+            attackPoints_ = _attackPoints * 125/100;             
 
         }        
 
@@ -701,7 +714,7 @@ function _getAbilities(uint256 _attackPoints, uint256 _accesssories, uint256 sen
             actions_.instantKillModifier = 35;
         }else if(_accesssories == 19 || _accesssories == 20 || _accesssories == 21){
             //Ranger
-            _attackPoints = _attackPoints * 135/100;
+            attackPoints_ = _attackPoints * 135/100;
         }  
 
 }
@@ -755,6 +768,22 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
                 newWeapon = ((newWeaponTier - 1) * 3) + (rand % 3);              
         
     }
+
+     function _rollitems(uint256 id_) internal view returns (uint256 newInventory) {
+    
+        uint16 morerand = uint16(_randomize(_rand(), "Inventory", id_));
+        uint16 diceRoll = uint16(_randomize(_rand(), "Dice", id_));
+        
+        diceRoll = (diceRoll % 100);
+        
+        if(diceRoll <= 20){
+
+            newInventory = morerand % 6 + 1;
+     
+        } 
+        
+    }
+
 
 
     function _rollCooldown(uint256 _timestamp, uint256 id, uint256 rand) internal view returns (uint256 timestamp_) {
@@ -987,6 +1016,30 @@ function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 
     }
 
 
+function addRampage(uint256 id, uint16 probDown_, uint16 probSame_, uint16 propUp_, uint16 levelsGained_, uint16 minLevel_, uint16 maxLevel_, uint16 renCost_, uint16 count_) external      
+    {
+        onlyOwner();
+
+            Rampages memory newRampage = Rampages({
+                
+                probDown: probDown_, 
+                probSame: probSame_, 
+                propUp: propUp_, 
+                levelsGained: levelsGained_, 
+                minLevel: minLevel_, 
+                maxLevel: maxLevel_, 
+                renCost: renCost_, 
+                count: count_
+                
+                }); 
+            
+        
+            rampages[id] = newRampage;
+        
+       
+    }
+
+
 
     function flipActiveStatus() external {
         onlyOwner();
@@ -1090,7 +1143,24 @@ function addCamp(uint256 id, uint16 baseRewards_, uint16 creatureCount_, uint16 
                        
         sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
         
-    }  
+    }
+
+    function changeElfWeapons(uint id, uint8 _primaryWeapon, uint8 _weaponTier, uint8 _attackPoints) external {
+        onlyOwner();
+        DataStructures.Elf memory elf = DataStructures.getElf(sentinels[id]);
+        DataStructures.ActionVariables memory actions;
+
+        elf.attackPoints    = _attackPoints;
+        elf.primaryWeapon   = _primaryWeapon;
+        elf.weaponTier      = _weaponTier;
+        
+        actions.traits = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
+        actions.class =  DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
+                       
+        sentinels[id] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
+        
+    }
+  
 
     function modifyElfDNA(uint256[] calldata ids, uint256[] calldata sentinel) external {
        onlyOwner();  
