@@ -774,7 +774,7 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
         
         if(diceRoll <= 20){
 
-            newInventory = morerand % 6 + 1;
+            newInventory = morerand % 5 + 1;
      
         }
 

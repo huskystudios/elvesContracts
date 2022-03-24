@@ -263,9 +263,9 @@ describe("Ethernal Elves Contracts", function () {
 
        for(let i =0; i<100; i++){
        
-        //await elves.connect(addr3).merchant([1], addr3.address);
+        await elves.connect(addr3).merchant([1], addr3.address);
         //increaseWorldTimeinSeconds(100, true)
-        await elves.connect(addr3).bloodThirst([1], true, false, addr3.address)
+        //await elves.connect(addr3).bloodThirst([1], true, false, addr3.address)
         increaseWorldTimeinSeconds(10000000, true)
         //await elves.rampage([1],rampage,tryWeapon, tryAxa, useItem,addr3.address);
        
