@@ -356,6 +356,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
 
                     require(elf.sentinelClass == 0, "not a healer"); 
                     require(elf.action != 3, "cant heal while passive"); //Cant heal in passve mode
+                    require(elf.action != 12, "cant heal while on Crusade"); //Cant heal in crusade mode
                     require(elf.timestamp < block.timestamp, "elf busy");
 
                     
