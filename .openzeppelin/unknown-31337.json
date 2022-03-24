@@ -154,6 +154,21 @@
       "address": "0xefc1aB2475ACb7E60499Efb171D173be19928a05",
       "txHash": "0xc56b0c1556231ccf1231fc1caf16ab519e58840ce71ed249a6454ec4304f0cbe",
       "kind": "transparent"
+    },
+    {
+      "address": "0xaC9fCBA56E42d5960f813B9D0387F3D3bC003338",
+      "txHash": "0x3f7bf3ab09593f7f0e5dcc5571a541f16c1ebdcc0a9c79bbcfd9971877bdb038",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x38A70c040CA5F5439ad52d0e821063b0EC0B52b6",
+      "txHash": "0x87c2cb16001fac196deda8e4911fb8d021ef8196b0a3737c1abfd2b02d509002",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x54B8d8E2455946f2A5B8982283f2359812e815ce",
+      "txHash": "0x78e846983691f89cb87d621b23a9b4c023d5e350380bb931dbb0f6272a8ea852",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -722,9 +737,9 @@
         }
       }
     },
-    "669e5ec090d830736b57ff12e72a3b2931a5fd63e44753fa81e9fdf6ca57d901": {
+    "06b5e5cf35c40b8dd99cfb4e03a58559b1248028a03cf45340f2fbec963bdc0a": {
       "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
-      "txHash": "0x2901822dd440a8b699ba64593e28ebfef0a447142de191bd91ebe897fa09993a",
+      "txHash": "0x57f5d7db8c7facd79e7cc00094545332ef8ab2cdf49b251810212461d327ca61",
       "layout": {
         "storage": [
           {
@@ -907,7 +922,7 @@
             "label": "camps",
             "offset": 0,
             "slot": "19",
-            "type": "t_mapping(t_uint256,t_struct(Camps)17735_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Camps)17734_storage)",
             "contract": "PolyEthernalElvesV4",
             "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:107"
           },
@@ -939,7 +954,7 @@
             "label": "rampages",
             "offset": 0,
             "slot": "23",
-            "type": "t_mapping(t_uint256,t_struct(Rampages)17769_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Rampages)17768_storage)",
             "contract": "PolyEthernalElvesV4",
             "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:117"
           },
@@ -983,16 +998,16 @@
           "t_mapping(t_uint256,t_address)": {
             "label": "mapping(uint256 => address)"
           },
-          "t_mapping(t_uint256,t_struct(Camps)17735_storage)": {
+          "t_mapping(t_uint256,t_struct(Camps)17734_storage)": {
             "label": "mapping(uint256 => struct PolyEthernalElvesV4.Camps)"
           },
-          "t_mapping(t_uint256,t_struct(Rampages)17769_storage)": {
+          "t_mapping(t_uint256,t_struct(Rampages)17768_storage)": {
             "label": "mapping(uint256 => struct PolyEthernalElvesV4.Rampages)"
           },
           "t_mapping(t_uint256,t_uint256)": {
             "label": "mapping(uint256 => uint256)"
           },
-          "t_struct(Camps)17735_storage": {
+          "t_struct(Camps)17734_storage": {
             "label": "struct PolyEthernalElvesV4.Camps",
             "members": [
               {
@@ -1021,7 +1036,7 @@
               }
             ]
           },
-          "t_struct(Rampages)17769_storage": {
+          "t_struct(Rampages)17768_storage": {
             "label": "struct PolyEthernalElvesV4.Rampages",
             "members": [
               {

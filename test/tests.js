@@ -157,7 +157,7 @@ describe("Ethernal Elves Contracts", function () {
 
   
 
-  describe("Check In, Check Out", function () {
+  describe("New Features", function () {
     it("Rampage tests", async function () {
 
       let level = 77
@@ -239,7 +239,50 @@ describe("Ethernal Elves Contracts", function () {
 
     })
 
+    it("Inventory tests", async function () {
+
+      let level = 77
+      let sentineClass = 1
+      let race = 0
+      let axa = 2
+      let item = 2
+      let weapon = 1
+      let weaponTier = 3
+     
+      
+      //function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class) public returns (uint16 id) {
+                            
+     
+
+        await elves.connect(addr3).mint(level,axa,race,sentineClass, item, weapon, weaponTier);
+        await elves.connect(addr3).mint(level,axa,race,0, item, weapon, weaponTier);
+        let takeMoney = "100000000000000000000000"
+        await elves.setAccountBalance(addr3.address, takeMoney)
+
+      
+
+       for(let i =0; i<100; i++){
+       
+        //await elves.connect(addr3).merchant([1], addr3.address);
+        //increaseWorldTimeinSeconds(100, true)
+        await elves.connect(addr3).bloodThirst([1], true, false, addr3.address)
+        increaseWorldTimeinSeconds(10000000, true)
+        //await elves.rampage([1],rampage,tryWeapon, tryAxa, useItem,addr3.address);
+       
+       }
+      
+       //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther("0.0")});    
+     
+
+       
+
+    })
+
+
+
   });
+
+
 
 
 

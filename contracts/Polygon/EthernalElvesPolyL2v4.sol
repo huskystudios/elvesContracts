@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "./ERC721.sol"; 
 import "./../DataStructures.sol";
 import "./../Interfaces.sol";
-import "hardhat/console.sol";
+//import "hardhat/console.sol";
 
 /*
 ███████╗████████╗██╗░░██╗███████╗██████╗░███╗░░██╗░█████╗░██╗░░░░░  ███████╗██╗░░░░░██╗░░░██╗███████╗░██████╗
@@ -161,15 +161,8 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     event BloodThirst(address indexed owner, uint256 indexed tokenId); 
     event ElfTransferedIn(uint256 indexed tokenId, uint256 sentinel); 
     event RenTransferedIn(address indexed from, uint256 renAmount); 
+    event RollOutcome(uint256 indexed tokenId, uint256 roll, uint256 action);
        
-
-  function setAuth(address[] calldata adds_, bool status) public {
-       onlyOwner();
-       
-        for (uint256 index = 0; index < adds_.length; index++) {
-            auth[adds_[index]] = status;
-        }
-    }
 
 
 /*
@@ -284,7 +277,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
             require(elf.owner == elfOwner, "NotYourElf");
             
             //Set special abilities when we retrieve the elf so they can be used in the rest of the game loop.            
-                    (elf.attackPoints, actions) = _getAbilities(elf.attackPoints, elf.accessories, elf.sentinelClass, actions);
+            (elf.attackPoints, actions) = _getAbilities(elf.attackPoints, elf.accessories, elf.sentinelClass, actions);
 
             uint256 rand = _rand();
                 
@@ -328,12 +321,12 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                     
                     require(elf.action == 3);                    
 
-                    actions.timeDiff = (block.timestamp - elf.timestamp) / 1 days; //amount of time spent in camp CHANGE TO 1 DAYS!
+                    actions.timeDiff = (block.timestamp - elf.timestamp) / 1 days; 
 
                     elf.level = _exitPassive(actions.timeDiff, elf.level, elfOwner);
                    
 
-                }else if(action == 5){//forge loop for weapons Note. CHANGE BEFORE LIVE
+                }else if(action == 5){//forging
                    
                     require(bankBalances[elfOwner] >= 200 ether, "Not Enough Ren");
                     require(elf.action != 3); //Cant roll in passve mode  
@@ -346,7 +339,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                    
                     require(bankBalances[elfOwner] >= 10 ether, "Not Enough Ren");
                     require(elf.action != 3); //Cant roll in passve mode
-                    
+                  
                     _setAccountBalance(elfOwner, 10 ether, true);
                      elf.inventory = _rollitems(id_);
                     //(elf.weaponTier, elf.primaryWeapon, elf.inventory) = DataStructures.roll(id_, elf.level, rand, 2, elf.weaponTier, elf.primaryWeapon, elf.inventory);                      
@@ -411,7 +404,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                        if(rollItems){
                        
                        // (elf.weaponTier, elf.primaryWeapon, elf.inventory) = DataStructures.roll(id_, elf.level, _rand(), 2, elf.weaponTier, elf.primaryWeapon, elf.inventory);  
-                       elf.inventory = _rollitems(id_);
+                        elf.inventory = _rollitems(id_);
                        }    
 
                         
@@ -430,8 +423,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                         require(elf.timestamp < block.timestamp, "elf busy");
                         
                         //in rampage you can get accessories or weapons.
-                       (elf, actions) = _rampage(elf, actions, campaign_, id_, elfOwner, rollWeapons, rollItems, useItem);
-                
+                       (elf, actions) = _rampage(elf, actions, campaign_, id_, elfOwner, rollWeapons, rollItems, useItem);                
                 
                 }        
              
@@ -602,19 +594,19 @@ function _rampage(
                             if(chance > 0 && chance <= rampage.probDown){
                                 //downgrade
                                 //dont downgrade if already 0
-                                console.log("downgrade: ", chance);
+                                //console.log("downgrade: ", chance);
                                 
                                 elf.accessories = elf.accessories == 0 ? 0 : elf.accessories - 1;
 
                             }else if(chance > rampage.probDown && chance <= (rampage.probDown + rampage.probSame)){
                                     //same
-                                    console.log("same: ", chance);
+                                    // console.log("same: ", chance);
                                   
                                     elf.accessories = elf.accessories;
 
                             }else if(chance > (rampage.probDown + rampage.probSame) && chance <= 100){
                                     //upgrade
-                                    console.log("upgrade: ", chance);
+                                   //   console.log("upgrade: ", chance);
                                     elf.accessories = elf.accessories + 1;
 
                             }
@@ -627,8 +619,7 @@ function _rampage(
                   
                     if(tryWeapon){
 
-                       //  console.log("not here");
-
+                      
                                     if(chance > 0 && chance <= rampage.probDown){
                                         //downgrade
                                         
@@ -655,6 +646,8 @@ function _rampage(
         
       elf.timestamp = block.timestamp + cooldown;
       elf.level = elf.level + levelsGained;
+
+     emit RollOutcome(_id, chance, 11);
                    
 }
 
@@ -746,7 +739,7 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
     }
 
 
-    function _rollWeapon(uint256 level, uint256 id, uint256 rand, uint256 maxTierWeapon) internal pure returns (uint256 newWeapon, uint256 newWeaponTier) {
+    function _rollWeapon(uint256 level, uint256 id, uint256 rand, uint256 maxTierWeapon) internal returns (uint256 newWeapon, uint256 newWeaponTier) {
     
         uint256 levelTier = level == 100 ? 5 : uint256((level/20) + 1);
                 
@@ -766,12 +759,14 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
                          
                 newWeaponTier = newWeaponTier > maxTierWeapon ? maxTierWeapon : newWeaponTier;
 
-                newWeapon = ((newWeaponTier - 1) * 3) + (rand % 3);              
+                newWeapon = ((newWeaponTier - 1) * 3) + (rand % 3);   
+
+                 emit RollOutcome(id, chance, 5);           
         
     }
 
-     function _rollitems(uint256 id_) internal view returns (uint256 newInventory) {
-    
+     function _rollitems(uint256 id_) internal returns (uint256 newInventory) {
+        
         uint16 morerand = uint16(_randomize(_rand(), "Inventory", id_));
         uint16 diceRoll = uint16(_randomize(_rand(), "Dice", id_));
         
@@ -781,13 +776,18 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
 
             newInventory = morerand % 6 + 1;
      
-        } 
+        }
+
+        //console.log("inventory", newInventory);
+
+        emit RollOutcome(id_, diceRoll, 6);       
+         
         
     }
 
 
 
-    function _rollCooldown(uint256 _timestamp, uint256 id, uint256 rand) internal view returns (uint256 timestamp_) {
+    function _rollCooldown(uint256 _timestamp, uint256 id, uint256 rand) internal returns (uint256 timestamp_) {
 
         uint16 chance = uint16 (_randomize(rand, "Cooldown", id) % 100); //percentage chance of re-rolling cooldown
         uint256 cooldownLeft = _timestamp - block.timestamp; //time left on cooldown
@@ -809,6 +809,8 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
                         
                         }
             }
+
+             emit RollOutcome(id, chance, 9);
 
         return timestamp_;    
                 
@@ -1175,6 +1177,14 @@ function addRampage(uint256 id, uint16 probDown_, uint16 probSame_, uint16 propU
         }        
         
     } 
+
+      function setAuth(address[] calldata adds_, bool status) public {
+       onlyOwner();
+       
+        for (uint256 index = 0; index < adds_.length; index++) {
+            auth[adds_[index]] = status;
+        }
+    }
     
 
 }
