@@ -19,7 +19,7 @@ import "./../Interfaces.sol";
 // We are the Ethernal. The Ethernal Elves         
 // Written by 0xHusky & Beff Jezos. Everything is on-chain for all time to come.
 // Version 4.0.1
-// Release notes: Adding Rampage and new abilities based on accessories 
+// Release notes: Adding Rampage and new abilities based on accessories e
 
 contract PolyEthernalElvesV4 is PolyERC721 {
 
@@ -70,7 +70,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     mapping(bytes => uint16)  public usedRenSignatures;
     address polyValidator;
     
-    //NewDataSlots from this deployment///
+   
     mapping(uint256 => Rampages) public rampages; //memory slot for campaigns
     bool private isRampageInit;
     struct Rampages {
@@ -101,7 +101,31 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     }
     
    
+    mapping(uint256 => PawnItems) public pawnItems; //memory slot for campaigns
     
+    struct PawnItems {
+                
+                uint256 buyPrice; 
+                uint256 sellPrice;     
+                uint256 maxSupply;     
+                uint256 currentInventory;     
+    }
+
+     //NewDataSlots from this deployment///
+
+    mapping(address => uint256) public scrolls; //memory slot for scrolls to go on crusades
+    mapping(address => uint256) public artifacts; //memory slot for artifact mint
+
+    function addCrusades(uint256[] calldata qty, address[] memory owners) external {
+
+        for(uint256 i = 0; i < qty.length; i++) {
+            if(qty[i] > 0) {
+                 scrolls[owners[i]] = qty[i];
+            }
+        }
+    }
+   
+    /*
     function initialize() public {
     
        require(!initialized, "Already initialized");
@@ -116,7 +140,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
        TIME_CONSTANT = 1 hours; 
        REGEN_TIME = 300 hours; 
 
-    }    
+    }  */  
 
     /*function initializeRampage() public {
     
@@ -132,17 +156,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
        rampages[6] = Rampages({probDown:  0, probSame: 50, propUp: 50, levelsGained: 0, minLevel:99, maxLevel:100, renCost:5000, count:100});       
        rampages[7] = Rampages({probDown:  0, probSame: 50, propUp: 50, levelsGained: 0, minLevel:99, maxLevel:100, renCost:6500, count:100});              
     }*/
-
-    function setAddresses(address _inventory, address _operator)  public {
-       onlyOwner();
-       elfmetaDataHandler   = IElfMetaDataHandler(_inventory);
-       operator             = _operator;
-    }
-
-    function setValidator(address _validator)  public {
-       onlyOwner();
-       polyValidator = _validator;
-    }      
+ 
     
 
 
@@ -250,8 +264,22 @@ contract PolyEthernalElvesV4 is PolyERC721 {
           for (uint256 index = 0; index < ids.length; index++) {  
             _actions(ids[index], 11, owner, campaign_, 0, tryWeapon_, tryAccessories_, useitem_, 0);
           }
-    }     
+    }
 
+  function buyItem(uint256 id, uint256 itemIndex_,address owner) external {
+          onlyOperator();       
+         //using sector for item index. The item you want to buy.
+          _actions(id, 12, owner, 0, itemIndex_, false,false,false, 0);
+          
+    }   
+
+    function sellItem(uint256 id, address owner) external {
+          onlyOperator();       
+        
+          _actions(id, 13, owner, 0, 0, false,false,false, 0);
+          
+    }   
+ 
 
 /*
 █ █▄░█ ▀█▀ █▀▀ █▀█ █▄░█ ▄▀█ █░░ █▀
@@ -349,7 +377,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
 
                     require(elf.sentinelClass == 0, "not a healer"); 
                     require(elf.action != 3, "cant heal while passive"); //Cant heal in passve mode
-                    require(elf.action != 12, "cant heal while on Crusade"); //Cant heal in crusade mode
+                    require(elf.action != 14, "cant heal while on Crusade"); //Cant heal in crusade mode
                     require(elf.timestamp < block.timestamp, "elf busy");
 
                     
@@ -425,10 +453,59 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                         //in rampage you can get accessories or weapons.
                        (elf, actions) = _rampage(elf, actions, campaign_, id_, elfOwner, rollWeapons, rollItems, useItem);                
                 
-                }        
+                }else if(action == 12){//Buy Item - pawn shop is selling
+                      require(elf.action != 3, "cant trade items while passive");
+                      //using sector for requested item
+                        elf.inventory = _sellItem(sector_, elfOwner); 
+                     
+                }else if(action == 13){//Sell Item pawnshop is buying
+                     require(elf.action != 3, "cant trade items while passive"); 
+                     elf.inventory = _buyItem(elf.inventory, elfOwner);                     
+
+                }else if(action == 14){//Go on a Crusade
+                     require(elf.action != 3, "cant trade items while passive"); 
+                     require(elf.timestamp < block.timestamp, "elf busy");      
+                     require(scrolls[elfOwner] > 0, "no scrolls left");
+                     require(bankBalances[elfOwner] >= 1500 ether, "Not Enough Ren to go on a crusade");
+                     
+                     _setAccountBalance(elfOwner, 1500 ether, true); // take ren from buyer
+                     scrolls[elfOwner] = scrolls[elfOwner] - 1;
+
+                    uint16 chance = uint16(_randomize(rand, "Inventory", id_));
+
+                     if(elf.level > 1 && elf.level < 60){
+                         elf.timestamp = block.timestamp + (7 days);
+                     }else if(elf.level >= 60 && elf.level < 80){
+                            
+                            elf.timestamp = block.timestamp + (5 days);
+
+                        }else if(elf.level > 80 && elf.level < 98){
+
+                            elf.timestamp = block.timestamp + (3 days);
+
+                        }else if(elf.level == 99 || elf.level == 100){
+
+                            elf.timestamp = block.timestamp + (2 days);
+
+                        }
+                     
+                     //calculate days on crusade.
+                     //emit event relating to crusade
+
+                  }else if(action == 15){//Return from Crusade
+                  //calculate number of artifacts
+                  //mint the artifacts on eth
+                  //emit event relating to artifacts
+                  
+                  } 
              
             actions.traits   = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
             actions.class    = DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
+
+            //Buffer overun protection
+            actions.class = actions.class == 256 ? 255 : actions.class;
+           
+
             elf.healthPoints = DataStructures.calcHealthPoints(elf.sentinelClass, elf.level); 
             elf.attackPoints = DataStructures.calcAttackPoints(elf.sentinelClass, elf.weaponTier);  
             elf.level        = elf.level > 100 ? 100 : elf.level; 
@@ -438,6 +515,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
             emit Action(elfOwner, action, id_); 
     }
 
+    
 
 function _campaignsEngine(uint256 _campId, uint256 _sector, uint256 _level, uint256 _attackPoints, uint256 _healthPoints, uint256 _inventory, bool _useItem) internal
  
@@ -482,9 +560,7 @@ function _instantKill(uint256 timestamp, uint256 weaponTier, address elfOwner, u
   uint256 killChance = weaponTier == 3 ? 10 : weaponTier == 4 ? 15 : weaponTier == 5 ? 20 : 0;
   
   //Increasing kill chance if the right accessory is equipped
-  killChance = killChance + instantKillModifier;
-
-       
+  killChance = killChance + instantKillModifier;       
 
     if(chance <= killChance){
       
@@ -774,11 +850,9 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
         
         if(diceRoll <= 20){
 
-            newInventory = morerand % 5 + 1;
+            newInventory = morerand % 6 + 1;//MAX VALUE 6. Min VALUE: 1
      
         }
-
-        //console.log("inventory", newInventory);
 
         emit RollOutcome(id_, diceRoll, 6);       
          
@@ -814,6 +888,46 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
 
         return timestamp_;    
                 
+    }
+
+    function _buyItem(uint buyItemIndex, address elfOwner) internal returns (uint256 newInventory) {
+            //SHOP IS BUYING
+            PawnItems memory _pawnItemsBuy = pawnItems[buyItemIndex]; //get item being sold
+            require(_pawnItemsBuy.currentInventory < _pawnItemsBuy.maxSupply, "not accepting more of this item");  //check if we will accept
+            require(buyItemIndex != 0, "no item to trade"); //check if we have an item to trade
+            require(buyItemIndex != 6, "not accepting this item"); //cannot trade this item           
+
+            uint256 buyPrice = uint256(_pawnItemsBuy.buyPrice); 
+            buyPrice = buyPrice * (1 ether); 
+ 
+            _setAccountBalance(elfOwner, buyPrice, false); // pay the seller
+            newInventory = 0; // take their item
+       
+            pawnItems[buyItemIndex].currentInventory = _pawnItemsBuy.currentInventory + 1; //add item to elf pawn stock
+
+                   
+        return newInventory;      
+        
+    }
+
+    function _sellItem(uint sellItemIndex, address elfOwner) internal returns (uint256 newInventory) {
+               //SHOP IS SELLING
+               require(sellItemIndex != 0, "no item to trade"); //check if we have an item to trade
+               PawnItems memory _pawnItems = pawnItems[sellItemIndex];  
+         
+               uint256 salePrice = uint256(_pawnItems.sellPrice);         
+               salePrice = salePrice * (1 ether);
+
+            require(_pawnItems.currentInventory > 0, "no items left");
+            require(bankBalances[elfOwner] >= salePrice, "Not Enough Ren to buy this item");
+
+            _setAccountBalance(elfOwner, salePrice, true); // take ren from buyer
+            newInventory = sellItemIndex; //give item to buyer
+            
+            pawnItems[sellItemIndex].currentInventory = _pawnItems.currentInventory - 1; //reduce our stocks        
+                   
+        return newInventory;      
+        
     }
     
 
@@ -1037,11 +1151,27 @@ function addRampage(uint256 id, uint16 probDown_, uint16 probSame_, uint16 propU
                 }); 
             
         
-            rampages[id] = newRampage;
-        
+            rampages[id] = newRampage;        
        
     }
 
+function addPawnItem(uint256 id, uint16 buyPrice_, uint16 sellPrice_, uint16 maxSupply_, uint16 currentInventory_) external      
+    {
+        onlyOwner();
+
+            PawnItems memory newPawnItem = PawnItems({
+                
+                buyPrice: buyPrice_, 
+                sellPrice: sellPrice_, 
+                maxSupply: maxSupply_, 
+                currentInventory: currentInventory_
+                
+                }); 
+            
+        
+            pawnItems[id] = newPawnItem;        
+       
+    }
 
 
     function flipActiveStatus() external {
@@ -1185,6 +1315,18 @@ function addRampage(uint256 id, uint16 probDown_, uint16 probSame_, uint16 propU
             auth[adds_[index]] = status;
         }
     }
+
+    
+    function setAddresses(address _inventory, address _operator)  public {
+       onlyOwner();
+       elfmetaDataHandler   = IElfMetaDataHandler(_inventory);
+       operator             = _operator;
+    }
+
+    function setValidator(address _validator)  public {
+       onlyOwner();
+       polyValidator = _validator;
+    }     
     
 
 }

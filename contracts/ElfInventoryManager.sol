@@ -130,7 +130,7 @@ contract ElfMetadataHandlerV2 {
                             abi.encodePacked(
                                 '{"name":"Elf #',
                                 toString(id_),
-                                '", "description":"EthernalElves is a collection of 6666 Sentinel Elves racing to awaken the Elders. These Elves a 100% on-chain. Play EthernalElves to upgrade your abilities and grow your army. !onward", "image": "',
+                                '", "description":"EthernalElves is a collection of 6666 Sentinel Elves racing to awaken the Elders. These Elves are 100% on-chain. Play EthernalElves to upgrade your abilities and grow your army. !onward", "image": "',
                                 "data:image/svg+xml;base64,",
                                 svg,
                                 '",',

@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
-    "txHash": "0xa9cd52a91b5738c2ee90e36a42a4f9b78f7f300e47836ebba5e8c134aa415ec7"
+    "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+    "txHash": "0xec0ba6f46b14f50b9c76e255cbe442425a530042a830d7afd35e485969cc5edf"
   },
   "proxies": [
     {
@@ -66,16 +66,6 @@
       "kind": "transparent"
     },
     {
-      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
-      "txHash": "0xda97cd85988761840532c96afb1c2e7f5a9c658ee99a5c24a33378d6db6f9b53",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
-      "txHash": "0xf93faebccde0f1cf60518e4f37c4259f49b4b3d44e4dabd51232b6d26754f3da",
-      "kind": "transparent"
-    },
-    {
       "address": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
       "txHash": "0x6f7c7bb9c21a4c13010127d93ccda3f64ca064ec2e72df64edd1b05480cd767d",
       "kind": "transparent"
@@ -91,11 +81,6 @@
       "kind": "transparent"
     },
     {
-      "address": "0xB0D4afd8879eD9F52b28595d31B441D079B2Ca07",
-      "txHash": "0x44931deb69421be980047d83c4c73faf0e180263bfdbb9cfcce2a2a554a6d11a",
-      "kind": "transparent"
-    },
-    {
       "address": "0x162A433068F51e18b7d13932F27e66a3f99E6890",
       "txHash": "0xe6ebeab6ab4d5f769bcc0c5574279941136e75018f6a4c38a4a63a7a48061f7a",
       "kind": "transparent"
@@ -106,43 +91,8 @@
       "kind": "transparent"
     },
     {
-      "address": "0xc351628EB244ec633d5f21fBD6621e1a683B1181",
-      "txHash": "0x4ecd4eda5a411748ddb9ba7b54a1961a0cd744644e0bdfd433b203b41b293915",
-      "kind": "transparent"
-    },
-    {
-      "address": "0xFD471836031dc5108809D173A067e8486B9047A3",
-      "txHash": "0x42581a7ae6336859f6a57112085c33c716fc59a6da0a299ae53b1751a3ec93ce",
-      "kind": "transparent"
-    },
-    {
-      "address": "0xcbEAF3BDe82155F56486Fb5a1072cb8baAf547cc",
-      "txHash": "0x2acfa9c86fabed1173bda1757ac23047dd75ed63b74d730d87f699276658671a",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f",
-      "txHash": "0xbc40e72e70bce912ea1f952f24684d4584fa2677c8375ddc51687db6794971cc",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x80a09c02d8bccbfb68ddb167eb5e54a74b27e0b1f46a6a4ca18595e38dccd7ac",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
-      "txHash": "0xb7f4ede3673b705088b55975c9ca2fa9c485efe82f2dfef8672d3a448b069374",
-      "kind": "transparent"
-    },
-    {
-      "address": "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
-      "txHash": "0x84e412947dea2e83311a6e2e21ea1eff256c550f3eebabed69c0fb2f07cf245d",
-      "kind": "transparent"
-    },
-    {
       "address": "0x986aaa537b8cc170761FDAC6aC4fc7F9d8a20A8C",
-      "txHash": "0x50750a9d4c9748f787ba93d8de0e0a2b22a1d0720b2b132eba89e0a3ea1526a4",
+      "txHash": "0x71ba488daf5a848f909e289e19aaa42d491137c7879eaecd8dbb101dc339a1cd",
       "kind": "transparent"
     },
     {
@@ -157,7 +107,7 @@
     },
     {
       "address": "0xaC9fCBA56E42d5960f813B9D0387F3D3bC003338",
-      "txHash": "0x3f7bf3ab09593f7f0e5dcc5571a541f16c1ebdcc0a9c79bbcfd9971877bdb038",
+      "txHash": "0x46d4ee8bddf84a8f24c98380ebfac8e6bbdfa60fbe9043e6a0376e566a52fe63",
       "kind": "transparent"
     },
     {
@@ -169,12 +119,157 @@
       "address": "0x54B8d8E2455946f2A5B8982283f2359812e815ce",
       "txHash": "0x78e846983691f89cb87d621b23a9b4c023d5e350380bb931dbb0f6272a8ea852",
       "kind": "transparent"
+    },
+    {
+      "address": "0x976C214741b4657bd99DFD38a5c0E3ac5C99D903",
+      "txHash": "0xb54540c266a95595add3897489bf9860b7cc6f6d4fa3767f32d08b4a0c1d91f5",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x8bEe2037448F096900Fd9affc427d38aE6CC0350",
+      "txHash": "0xf83b44622109180ab9a8770b796bc4644a9fd5b42ec8d8db2b9aa90430c32edb",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x942ED2fa862887Dc698682cc6a86355324F0f01e",
+      "txHash": "0x7d85cc522dc292df66640c55815a4bfa133b531c742cb95e96107bc9da1cf18d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+      "txHash": "0x5fc70d90a49210360624cd35f3fefcfe34763a23a7ce859006ddcd2e66fbb80c",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+      "txHash": "0xb7f4ede3673b705088b55975c9ca2fa9c485efe82f2dfef8672d3a448b069374",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
+      "txHash": "0x84e412947dea2e83311a6e2e21ea1eff256c550f3eebabed69c0fb2f07cf245d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc351628EB244ec633d5f21fBD6621e1a683B1181",
+      "txHash": "0xa40a8f50d28c50550fad783af2516bec12b5897c426689912b7a47c292280616",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xFD471836031dc5108809D173A067e8486B9047A3",
+      "txHash": "0x0847ccd5707e79f9b49057d592535ff59920aa1fe8e970343210837dd63917ca",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xf953b3A269d80e3eB0F2947630Da976B896A8C5b",
+      "txHash": "0x9cd3265edb645015a4199a6830e99a654979938797092068878fc42e7fd578a4",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xAA292E8611aDF267e563f334Ee42320aC96D0463",
+      "txHash": "0x889e97250e438df8dfcf1d71f8fb07244a666251f90d693fa3bcdd7c6a4c4378",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5c74c94173F05dA1720953407cbb920F3DF9f887",
+      "txHash": "0x7309cdc5584b4307bd3381ca2fde095dfe08eee8e3f3258ff609aaa50ed3f61c",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5FeaeBfB4439F3516c74939A9D04e95AFE82C4ae",
+      "txHash": "0xbed9a34fe8bf8b31a986bfc7580f03c2b618f1a0110db9408c39aac7d760c4e5",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x976fcd02f7C4773dd89C309fBF55D5923B4c98a1",
+      "txHash": "0xb56db4a537acb93410993ef65768fa647b86ca7cfe5b5a2ca8fd0080ce32ab16",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x19cEcCd6942ad38562Ee10bAfd44776ceB67e923",
+      "txHash": "0x3563933264c89ece1865680ef95e648805491013b7e8e50b57e9e4db49032d1b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+      "txHash": "0x923e58ba31bc076f5fedb3147b603618661009344a00090a71cee3dbe595cb2c",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+      "txHash": "0xc5d174e5c6af1277a7985ec04df07ced5ad43b1f473a1a1d2786e16aaab8d088",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
+      "txHash": "0x7cda4daac1920c0ab1441205bb551231645f30c957fae69381a4439c3744d915",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xcbEAF3BDe82155F56486Fb5a1072cb8baAf547cc",
+      "txHash": "0x9e5264d627266ea7d8c620db8fa177cdcd1ee510085ff8991c0c69bb7049cace",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f",
+      "txHash": "0xa36466ebfc328efec6764c2ed47ab604d148fc760726e48f8865b346c3e04dcf",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xB0D4afd8879eD9F52b28595d31B441D079B2Ca07",
+      "txHash": "0x39c16f336c486a05013fe4cc96d13cd738d3035a5d28a33902970d2a41971aaa",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x720472c8ce72c2A2D711333e064ABD3E6BbEAdd3",
+      "txHash": "0x8d3ccfcfe167516b613d713c6914de854ecda710e5b67d48140386c18715ae5b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xe8D2A1E88c91DCd5433208d4152Cc4F399a7e91d",
+      "txHash": "0xee991051d47fe5542ea954a0fa88ee62d28639bbb2dff54837a6a2879fd612dd",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5067457698Fd6Fa1C6964e416b3f42713513B3dD",
+      "txHash": "0xb2766cab15ec9ce5a528ff8ca7f4feaa37c6702847531036fae36edfb1a35453",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xfcDB4564c18A9134002b9771816092C9693622e3",
+      "txHash": "0xe6b8a5bb7de02590fc24484bcc5d743849d62261aa4d6f4527a4da37e97ea557",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x927b167526bAbB9be047421db732C663a0b77B11",
+      "txHash": "0x9466c894755eed7458cd3698371cfcbd4fd1feac5e0aaea211722c8705c190f0",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x32EEce76C2C2e8758584A83Ee2F522D4788feA0f",
+      "txHash": "0x3e23d22bc99390058c5d082e4b2db3b4d63dbda0bf486a91e457bec9ea1b6c8f",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x02df3a3F960393F5B349E40A599FEda91a7cc1A7",
+      "txHash": "0xfca6e58a725112c2018eb4529e6eb79d9091f6e32a8434fde2cef7e945172fdd",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x821f3361D454cc98b7555221A06Be563a7E2E0A6",
+      "txHash": "0x9b251f70f934460ed39a151da736d2667d70d6874917ef307cd4814caf015a50",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1780bCf4103D3F501463AD3414c7f4b654bb7aFd",
+      "txHash": "0x72ec16f2bf30cef39560107ecaac4f25c382c061ad4acc82310a2355c84141cd",
+      "kind": "transparent"
     }
   ],
   "impls": {
     "0933981ec54fb323e2b60e1ac2fd2c60c7af8d32fe67079a27bc005e233b4d30": {
-      "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
-      "txHash": "0x4707968624caa65b9b7972eb0e0ad2bf2b91a2e4459d2b07bfc6d54be989f441",
+      "address": "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
+      "txHash": "0xbad7d5ec69fb3192ee99bf3db78059c4c3a3de2327dcea0caf0f38067b8db0f4",
       "layout": {
         "storage": [
           {
@@ -229,7 +324,7 @@
             "label": "camps",
             "offset": 0,
             "slot": "5",
-            "type": "t_mapping(t_uint256,t_struct(Camps)2150_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Camps)2900_storage)",
             "contract": "ElfCampaignsV3",
             "src": "contracts\\ElfCampaigns.sol:26"
           },
@@ -268,13 +363,13 @@
           "t_bytes32": {
             "label": "bytes32"
           },
-          "t_mapping(t_uint256,t_struct(Camps)2150_storage)": {
+          "t_mapping(t_uint256,t_struct(Camps)2900_storage)": {
             "label": "mapping(uint256 => struct ElfCampaignsV3.Camps)"
           },
           "t_mapping(t_uint256,t_uint256)": {
             "label": "mapping(uint256 => uint256)"
           },
-          "t_struct(Camps)2150_storage": {
+          "t_struct(Camps)2900_storage": {
             "label": "struct ElfCampaignsV3.Camps",
             "members": [
               {
@@ -660,8 +755,8 @@
       }
     },
     "c973a43eaf057eca5ee0d39b660da63661a280542e6d0bbd34bb599b6a347885": {
-      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
-      "txHash": "0x78858f4f96b671ebf1804d3d6a3cbe7f7ef546a4dc9c23e7cac12a24a74c6f5d",
+      "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+      "txHash": "0xf8044091a1c5c1ac5697a137419bc77f40ba03dc85f7fcaed2450b76dc576717",
       "layout": {
         "storage": [
           {
@@ -737,9 +832,9 @@
         }
       }
     },
-    "78d2284160712b592f374ad0de05a4eeede9b9fe6d5c03c5a8cec3134817baba": {
-      "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
-      "txHash": "0xdae79c9d8ac6fd95263960966d395c75ef0ac6dfb70c4f33115a5a4365b177ac",
+    "0e9ad5d858f02317bb2096bc0d52d668005cdce643b5373707913e671c263041": {
+      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      "txHash": "0x680d5a2193025b9bd2096315a218c47e64e7fd52863c030638501cab34906728",
       "layout": {
         "storage": [
           {
@@ -818,9 +913,9 @@
             "label": "elfmetaDataHandler",
             "offset": 0,
             "slot": "9",
-            "type": "t_contract(IElfMetaDataHandler)10448",
+            "type": "t_contract(IElfMetaDataHandler)11198",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:76"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:78"
           },
           {
             "label": "isGameActive",
@@ -828,7 +923,7 @@
             "slot": "9",
             "type": "t_bool",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:89"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:90"
           },
           {
             "label": "isTerminalOpen",
@@ -836,7 +931,7 @@
             "slot": "9",
             "type": "t_bool",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:90"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:91"
           },
           {
             "label": "initialized",
@@ -844,7 +939,7 @@
             "slot": "9",
             "type": "t_bool",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:91"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:92"
           },
           {
             "label": "operator",
@@ -852,7 +947,7 @@
             "slot": "10",
             "type": "t_address",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:92"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:93"
           },
           {
             "label": "INIT_SUPPLY",
@@ -860,7 +955,7 @@
             "slot": "11",
             "type": "t_uint256",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:92"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:93"
           },
           {
             "label": "price",
@@ -868,7 +963,7 @@
             "slot": "12",
             "type": "t_uint256",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:93"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:94"
           },
           {
             "label": "MAX_LEVEL",
@@ -884,7 +979,7 @@
             "slot": "14",
             "type": "t_uint256",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:94"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:95"
           },
           {
             "label": "REGEN_TIME",
@@ -892,7 +987,7 @@
             "slot": "15",
             "type": "t_uint256",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:95"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:96"
           },
           {
             "label": "ketchup",
@@ -900,7 +995,7 @@
             "slot": "16",
             "type": "t_bytes32",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:96"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:97"
           },
           {
             "label": "sentinels",
@@ -908,7 +1003,7 @@
             "slot": "17",
             "type": "t_mapping(t_uint256,t_uint256)",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:97"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:98"
           },
           {
             "label": "bankBalances",
@@ -916,15 +1011,15 @@
             "slot": "18",
             "type": "t_mapping(t_address,t_uint256)",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:99"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:104"
           },
           {
             "label": "camps",
             "offset": 0,
             "slot": "19",
-            "type": "t_mapping(t_uint256,t_struct(Camps)17734_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Camps)18540_storage)",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:107"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:106"
           },
           {
             "label": "auth",
@@ -932,7 +1027,7 @@
             "slot": "20",
             "type": "t_mapping(t_address,t_bool)",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:113"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:116"
           },
           {
             "label": "usedRenSignatures",
@@ -940,7 +1035,7 @@
             "slot": "21",
             "type": "t_mapping(t_bytes_memory_ptr,t_uint16)",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:113"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:117"
           },
           {
             "label": "polyValidator",
@@ -948,15 +1043,15 @@
             "slot": "22",
             "type": "t_address",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:115"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:119"
           },
           {
             "label": "rampages",
             "offset": 0,
             "slot": "23",
-            "type": "t_mapping(t_uint256,t_struct(Rampages)17768_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Rampages)18574_storage)",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:117"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:119"
           },
           {
             "label": "isRampageInit",
@@ -964,7 +1059,39 @@
             "slot": "24",
             "type": "t_bool",
             "contract": "PolyEthernalElvesV4",
-            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:123"
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:121"
+          },
+          {
+            "label": "pawnItems",
+            "offset": 0,
+            "slot": "25",
+            "type": "t_mapping(t_uint256,t_struct(PawnItems)18607_storage)",
+            "contract": "PolyEthernalElvesV4",
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:147"
+          },
+          {
+            "label": "scrolls",
+            "offset": 0,
+            "slot": "26",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "PolyEthernalElvesV4",
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:150"
+          },
+          {
+            "label": "artifacts",
+            "offset": 0,
+            "slot": "27",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "PolyEthernalElvesV4",
+            "src": "contracts\\Polygon\\EthernalElvesPolyL2v4.sol:152"
+          },
+          {
+            "label": "initialized",
+            "offset": 0,
+            "slot": "28",
+            "type": "t_bool",
+            "contract": "EETest",
+            "src": "contracts\\Polygon\\EEPolyTest.sol:56"
           }
         ],
         "types": {
@@ -980,7 +1107,7 @@
           "t_bytes_memory_ptr": {
             "label": "bytes"
           },
-          "t_contract(IElfMetaDataHandler)10448": {
+          "t_contract(IElfMetaDataHandler)11198": {
             "label": "contract IElfMetaDataHandler"
           },
           "t_mapping(t_address,t_bool)": {
@@ -998,16 +1125,19 @@
           "t_mapping(t_uint256,t_address)": {
             "label": "mapping(uint256 => address)"
           },
-          "t_mapping(t_uint256,t_struct(Camps)17734_storage)": {
+          "t_mapping(t_uint256,t_struct(Camps)18540_storage)": {
             "label": "mapping(uint256 => struct PolyEthernalElvesV4.Camps)"
           },
-          "t_mapping(t_uint256,t_struct(Rampages)17768_storage)": {
+          "t_mapping(t_uint256,t_struct(PawnItems)18607_storage)": {
+            "label": "mapping(uint256 => struct PolyEthernalElvesV4.PawnItems)"
+          },
+          "t_mapping(t_uint256,t_struct(Rampages)18574_storage)": {
             "label": "mapping(uint256 => struct PolyEthernalElvesV4.Rampages)"
           },
           "t_mapping(t_uint256,t_uint256)": {
             "label": "mapping(uint256 => uint256)"
           },
-          "t_struct(Camps)17734_storage": {
+          "t_struct(Camps)18540_storage": {
             "label": "struct PolyEthernalElvesV4.Camps",
             "members": [
               {
@@ -1036,7 +1166,28 @@
               }
             ]
           },
-          "t_struct(Rampages)17768_storage": {
+          "t_struct(PawnItems)18607_storage": {
+            "label": "struct PolyEthernalElvesV4.PawnItems",
+            "members": [
+              {
+                "label": "buyPrice",
+                "type": "t_uint256"
+              },
+              {
+                "label": "sellPrice",
+                "type": "t_uint256"
+              },
+              {
+                "label": "maxSupply",
+                "type": "t_uint256"
+              },
+              {
+                "label": "currentInventory",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Rampages)18574_storage": {
             "label": "struct PolyEthernalElvesV4.Rampages",
             "members": [
               {

@@ -18,7 +18,7 @@ import "./EthernalElvesPolyL2v4.sol";
 // Release notes: Adding Rampage and new abilities based on accessories 
 
 contract EETest is PolyEthernalElvesV4 {
-
+ bool private initialized;
 /////////THIS CODE IS NOT TO BE USED IN PROD
  function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class, uint8 _item, uint8 _weapon, uint8 _weaponTier) public returns (uint16 id) {
         
@@ -63,5 +63,21 @@ contract EETest is PolyEthernalElvesV4 {
             _mint(msg.sender, id);           
 
         }
+
+            function initialize() public {
+    
+       require(!initialized, "Already initialized");
+       admin                = msg.sender;   
+       initialized          = true;
+       operator             = 0xa2B877EC3234F50C33Ff7d0605F7591053d06E31; 
+       elfmetaDataHandler   = IElfMetaDataHandler(0x3cF1630393BFd1D9fF52bD822fE88714FC81467E);
+
+       camps[1] = Camps({baseRewards: 10, creatureCount: 1000, creatureHealth: 120,  expPoints:6,   minLevel:1, campMaxLevel:100});
+
+       MAX_LEVEL = 100;
+       TIME_CONSTANT = 1 hours; 
+       REGEN_TIME = 300 hours; 
+
+    }   
 
 }
