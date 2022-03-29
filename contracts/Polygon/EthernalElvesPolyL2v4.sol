@@ -113,10 +113,13 @@ contract PolyEthernalElvesV4 is PolyERC721 {
 
      //NewDataSlots from this deployment///
 
-    mapping(address => uint256) public scrolls; //memory slot for scrolls to go on crusades
-    mapping(address => uint256) public artifacts; //memory slot for artifact mint
-
-    function addCrusades(uint256[] calldata qty, address[] memory owners) external {
+    //CRUSADER NO REGRET// 
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    mapping(address => uint256) public scrolls; //memory slot for scrolls to go on crusades////
+    mapping(address => uint256) public artifacts; //memory slot for artifact mint           ///
+    mapping(uint256 => uint256) public onCrusade;                                           /// 
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    function addScolls(uint256[] calldata qty, address[] memory owners) external {
 
         for(uint256 i = 0; i < qty.length; i++) {
             if(qty[i] > 0) {
@@ -176,6 +179,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
     event ElfTransferedIn(uint256 indexed tokenId, uint256 sentinel); 
     event RenTransferedIn(address indexed from, uint256 renAmount); 
     event RollOutcome(uint256 indexed tokenId, uint256 roll, uint256 action);
+    event Artifacts(address indexed from, uint256 artifacts, uint256 indexed tokenId);
        
 
 
@@ -278,7 +282,24 @@ contract PolyEthernalElvesV4 is PolyERC721 {
         
           _actions(id, 13, owner, 0, 0, false,false,false, 0);
           
-    }   
+    }
+
+     function sendCrusade(uint256[] calldata ids, address owner) external {
+          onlyOperator();       
+          //using items bool for try accessories
+          for (uint256 index = 0; index < ids.length; index++) {  
+            _actions(ids[index], 14, owner, 0, 0, false,false, false, 0);
+          }
+    }
+
+     function returnCrusade(uint256[] calldata ids, address owner) external {
+          onlyOperator();       
+
+          for (uint256 index = 0; index < ids.length; index++) {  
+                
+                _returnCrusade(ids[index], owner);
+          }
+    } 
  
 
 /*
@@ -303,6 +324,8 @@ contract PolyEthernalElvesV4 is PolyERC721 {
             GameVariables memory actions;
             require(isGameActive);
             require(elf.owner == elfOwner, "NotYourElf");
+            require(onCrusade[id_] == 0, "Can't do anything while on crusade");
+             
             
             //Set special abilities when we retrieve the elf so they can be used in the rest of the game loop.            
             (elf.attackPoints, actions) = _getAbilities(elf.attackPoints, elf.accessories, elf.sentinelClass, actions);
@@ -463,13 +486,14 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                      elf.inventory = _buyItem(elf.inventory, elfOwner);                     
 
                 }else if(action == 14){//Go on a Crusade
-                     require(elf.action != 3, "cant trade items while passive"); 
+                     require(elf.action != 3, "cant go on a crusade while passive"); 
                      require(elf.timestamp < block.timestamp, "elf busy");      
                      require(scrolls[elfOwner] > 0, "no scrolls left");
                      require(bankBalances[elfOwner] >= 1500 ether, "Not Enough Ren to go on a crusade");
                      
                      _setAccountBalance(elfOwner, 1500 ether, true); // take ren from buyer
                      scrolls[elfOwner] = scrolls[elfOwner] - 1;
+                     onCrusade[id_] = 1;
 
                     uint16 chance = uint16(_randomize(rand, "Inventory", id_));
 
@@ -492,12 +516,7 @@ contract PolyEthernalElvesV4 is PolyERC721 {
                      //calculate days on crusade.
                      //emit event relating to crusade
 
-                  }else if(action == 15){//Return from Crusade
-                  //calculate number of artifacts
-                  //mint the artifacts on eth
-                  //emit event relating to artifacts
-                  
-                  } 
+                  }
              
             actions.traits   = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
             actions.class    = DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
@@ -929,6 +948,37 @@ function _exitPassive(uint256 timeDiff, uint256 _level, address _owner) private 
         return newInventory;      
         
     }
+
+    function _returnCrusade(uint256 id_, address elfOwner) private {
+            onCrusade[id_] = 0;//reset elf on crusade
+            DataStructures.Elf memory elf = DataStructures.getElf(sentinels[id_]);
+            
+            GameVariables memory actions;
+            require(isGameActive);
+            require(elf.owner == elfOwner, "NotYourElf");
+            require(elf.timestamp < block.timestamp, "elf on crusade");
+            require(elf.action == 14, "go on crusade first"); 
+           
+            elf.action = 15;
+
+            uint256 chance = _randomize(_rand(), "Crusade", id_) % 100;
+            uint256 artifactsReceived = 1;
+
+            if(chance < 10){
+                artifactsReceived = 2;
+            }
+
+            artifacts[elfOwner] = artifactsReceived + artifacts[elfOwner];
+
+            actions.traits = DataStructures.packAttributes(elf.hair, elf.race, elf.accessories);
+            actions.class =  DataStructures.packAttributes(elf.sentinelClass, elf.weaponTier, elf.inventory);
+                       
+            sentinels[id_] = DataStructures._setElf(elf.owner, elf.timestamp, elf.action, elf.healthPoints, elf.attackPoints, elf.primaryWeapon, elf.level, actions.traits, actions.class);
+            
+            emit Action(elfOwner, 15, id_); 
+            emit Artifacts(elfOwner, artifactsReceived, id_);
+    }
+    
     
 
     function _setAccountBalance(address _owner, uint256 _amount, bool _subtract) private {

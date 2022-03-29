@@ -147,119 +147,61 @@ describe("Ethernal Elves Contracts", function () {
   await elves.setAuth([owner.address, addr3.address], true);
 
 
+        //mint some elves 
+        let level = [77,10,54,99,100,60,45]
+        let sentineClass = [0,1,2]
+        let race = [0,1,2,3]
+        let axa = [0,1,2,3,4,5,]
+        let item = [0,1,2,3,4,5,6]
+        let weapon = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+        let weaponTier = [1,2,3,4,5]
+      
+       
+          await elves.connect(addr3).mint(level[0],axa[0],race[0],sentineClass[1], item[3], weapon[0], weaponTier[0]);
+          await elves.connect(addr3).mint(level[0],axa[0],race[0],sentineClass[2], item[2], weapon[0], weaponTier[0]);
+          await elves.connect(addr3).mint(level[0],axa[0],race[0],sentineClass[0], item[6], weapon[0], weaponTier[0]);
+        
+        
+        await elves.addRampage(4,5,30,65, 0, 1, 100,0,100)
+      
+        let fundRen = "100000000000000000000000"
+        await elves.setAccountBalance(addr3.address, fundRen)
 
-  //terminus = await Terminus.deploy();
-  //terminus.initialize(elves.address)
 
-  //elves.setTerminus(terminus.address)
   
-  
-
   });
 
 
   
 
   describe("New Features", function () {
+
     it("Rampage tests", async function () {
 
-      let level = 77
-      let sentineClass = 1
-      let race = 0
-      let axa = 2
-      let item = 3
-      let weapon = 1
-      let weaponTier = 3
-      //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther(".01")});//fail
-      //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther("0.0")});    
-      
-      //function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class) public returns (uint16 id) {
-                            
-      await elves.addRampage(4,5,30,65, 0, 1, 100,0,100)
 
-        await elves.connect(addr3).mint(level,axa,race,sentineClass, item, weapon, weaponTier);
-        await elves.connect(addr3).mint(level,axa,race,0, item, weapon, weaponTier);
-        let takeMoney = "100000000000000000000000"
-        await elves.setAccountBalance(addr3.address, takeMoney)
-
-      //  function rampage(uint256[] calldata ids, uint256 campaign_, bool tryWeapon_, bool tryAccessories_, bool useitem_, address owner) external {
-
-       // console.log(await elves.attributes(1))
-       // console.log(await elves.elves(1))
+           
        let tryAxa = true
        let useItem = true
        let tryWeapon = true
        let rampage = 4
 
+       await elves.connect(addr3).rampage([1],rampage,tryWeapon, tryAxa, useItem,addr3.address);
        increaseWorldTimeinSeconds(36* 24 * 60 * 60, true)
-       await elves.rampage([1],rampage,tryWeapon, tryAxa, useItem,addr3.address);
+       await elves.connect(addr3).bloodThirst([1], tryAxa, useItem,addr3.address);
+       await elves.connect(addr3).heal([3],[1],addr3.address);
+
        
-       
-       
-       //await elves.bloodThirst([1], tryAxa, useItem,addr3.address);
-       //await elves.heal([2],[1],addr3.address);
-
-       //1. NO DICE WT TOO LOW
-       //WT3 no ability
-      
-      
-      /* increaseWorldTimeinSeconds(36* 24 * 60 * 60, true)
-       await elves.rampage([1],rampage,tryWeapon, tryAxa, useItem,addr3.address);
-       increaseWorldTimeinSeconds(36* 24 * 60 * 60, true)
-       await elves.rampage([1],rampage,tryWeapon, tryAxa, useItem,addr3.address);
-       increaseWorldTimeinSeconds(36* 24 * 60 * 60, true)
-       await elves.rampage([1],rampage,tryWeapon, tryAxa, useItem,addr3.address);
-
-*/
-     //   console.log(await elves.elves(1))
-
-
-    //  await elves.setElfManually(1,1,weaponTier,1,1,level,1,1,1,0)
-
-     // await elves.connect(addr3).forging([1], {value: ethers.utils.parseEther("0.04")})
-
  //     console.log(await elves.attributes(1))
  //     console.log(await elves.elves(1))
  //     console.log(await elves.rampages(rampage))
  //     console.log(await elves.bankBalances(addr3.address))
 
-     // console.log(await elves.tokenURI(1))
-
-      
-     
-
-
-      //check out
-
-   //   let sentinelDNA = "45427413644928360261459227712385514627098612091526571146141633128741054971904"
-// console.log(await elves.getSentinel(2))
-   //   await elves.connect(addr3).checkOut(1, sentinelDNA)
-
-
+ 
     })
 
     it("Inventory tests", async function () {
 
-      let level = 77
-      let sentineClass = 2
-      let race = 0
-      let axa = 2
-      let item = 2
-      let weapon = 1
-      let weaponTier = 5
      
-      
-      //function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class) public returns (uint16 id) {
-                            
-     
-
-        await elves.connect(addr3).mint(level,axa,race,sentineClass, item, weapon, weaponTier);
-        await elves.connect(addr3).mint(level,axa,race,0, item, weapon, weaponTier);
-        let takeMoney = "100000000000000000000000"
-        await elves.setAccountBalance(addr3.address, takeMoney)
-
-      
-
        for(let i =0; i<2; i++){
        
         await elves.connect(addr3).merchant([1], addr3.address);
@@ -285,43 +227,20 @@ describe("Ethernal Elves Contracts", function () {
       elves.addPawnItem(4,40,45,10,0)
       elves.addPawnItem(5,50,55,10,5)
 
-      let level = 77
-      let sentineClass = 1
-      let race = 0
-      let axa = 2
-      let item = 1
-      let weapon = 1
-      let weaponTier = 3
-
-      await elves.connect(addr3).mint(level,axa,race,sentineClass, item, weapon, weaponTier);
-     
-      //elves.tradeItem(uint8 inventory, uint id, uint tradeAction, address elfOwner) external {
-      
-      
-      
-      //function mint(uint8 _level, uint8 _accessories, uint8 _race, uint8 _class) public returns (uint16 id) {
-                            
-     
-
-        //await elves.connect(addr3).mint(level,axa,race,sentineClass, item, weapon, weaponTier);
-       // await elves.connect(addr3).mint(level,axa,race,0, 6, weapon, weaponTier);
-        let takeMoney = "100000000000000000000000"
-        await elves.setAccountBalance(addr3.address, takeMoney)
-
-        //sell item 2
         await elves.connect(addr3).sellItem(1, addr3.address) 
 
         await elves.connect(addr3).buyItem(1,5, addr3.address) 
     
 
-        console.log(await elves.pawnItems(1))
+        /*console.log(await elves.pawnItems(1))
         console.log(await elves.pawnItems(2))
         console.log(await elves.pawnItems(3))
         console.log(await elves.pawnItems(4))
         console.log(await elves.pawnItems(5))
-      
+      */
 
- 
+       // expect(await token.balanceOf(wallet.address)).to.equal(993);
+
       
        //elves.connect(addr3).forging([1],{ value: ethers.utils.parseEther("0.0")});    
      
@@ -334,11 +253,27 @@ describe("Ethernal Elves Contracts", function () {
      await artifacts.mint(10);
       let response = await artifacts.tokenURI(1);
 
-      console.log(response)
-
-       
+      //console.log(response)       
 
     })
+
+    it("Add scrolls, go on crusade", async function () {
+
+      await elves.addScolls([10], [addr3.address])
+      expect(parseInt(await elves.scrolls(addr3.address))).to.equal(10)
+
+      await elves.connect(addr3).sendCrusade([1],addr3.address);
+
+      expect(parseInt(await elves.scrolls(addr3.address))).to.equal(9)
+
+      increaseWorldTimeinSeconds(10 * 24* 24 * 60 * 60, true)
+
+      await elves.connect(addr3).returnCrusade([1],addr3.address);
+     
+      console.log("Artifacts got", await elves.artifacts(addr3.address))
+     
+ 
+     })
 
 
 
